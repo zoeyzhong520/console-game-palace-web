@@ -1,11 +1,8 @@
-import { Button } from 'antd';
-import './App.css';
+import Home from './pages/home/home'
 
 function App() {
   return (
-    <div className="App">
-      <Button type="primary">Button</Button>
-    </div>
+    <Home />
   );
 }
 
