@@ -1,9 +1,12 @@
-import { useState } from 'react/cjs/react.production.min'
 import { tabsList } from './common'
 import './home.css'
 
 // 左侧菜单
 const Left = () => {
+    const logo = () => {
+        return <img className='home-left-logo' src={require('./static/logo.png').default} alt='' />
+    }
+
     const showTabs = () => {
         return <div>
             {tabsList.map(item => {
@@ -14,7 +17,7 @@ const Left = () => {
 
     return (
         <div className='home-left'>
-            <div className='home-left-logo'></div>
+            {logo()}
             {showTabs()}
         </div>
     )
@@ -25,7 +28,7 @@ const Content = () => {
     // 搜索框
     const searchBar = () => {
         return <div className='home-content-search-bar'>
-            <input type='text' placeholder='请输入...' name='' id='' value=''></input>
+            <input type='text' placeholder='请输入...' name='search'></input>
             <button>搜索</button>
         </div>
     }
