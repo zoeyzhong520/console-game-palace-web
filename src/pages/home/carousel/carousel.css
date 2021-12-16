@@ -22,7 +22,8 @@
 
 .ul li img {
     /* 宽度撑满，高度自适应，避免图片拉伸变形 */
-    width: 100%;    
+    width: 100%;
+    min-height: 350px;    
 }
 
 .carousel-control .left {
@@ -31,6 +32,14 @@
     left: 10px;
     padding: 5px;
     transform: translateY(-50%);
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.carousel-control .left:hover {
+    background-color: skyblue;
 }
 
 .carousel-control .right {
@@ -39,6 +48,14 @@
     right: 10px;
     padding: 5px;
     transform: translateY(-50%);
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.carousel-control .right:hover {
+    background-color: skyblue;
 }
 
 .carousel-dots {

@@ -109,8 +109,8 @@ class Carousel extends React.Component {
                     })}
                 </ul>
                 <div className='carousel-control'>
-                    <span className='left' onClick={(e) => this.previous(e)}>左</span>
-                    <span className='right' onClick={(e) => this.next(e)}>右</span>
+                    <span className='left' onClick={(e) => this.previous(e)}>上一个</span>
+                    <span className='right' onClick={(e) => this.next(e)}>下一个</span>
                 </div>
             </div>
         )
