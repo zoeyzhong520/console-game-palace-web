@@ -1,3 +1,4 @@
+import Carousel from './carousel/carousel'
 import { tabsList } from './common'
 import './home.css'
 
@@ -36,6 +37,7 @@ const Content = () => {
     return (
         <div className='home-content'>
             {searchBar()}
+            <Carousel />
         </div>
     )
 }

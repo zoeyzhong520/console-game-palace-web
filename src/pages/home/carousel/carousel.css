@@ -1,0 +1,66 @@
+.carousel {
+    width: 100%;
+    height: 350px;
+    position: relative;
+    overflow: hidden;
+    background-color: powderblue;
+}
+
+.carousel .ul {
+    height: 100%;
+    list-style: none;
+}
+
+.ul li.show {
+    display: block;
+}
+
+.ul li {
+    display: none;
+    text-align: center;
+}
+
+.ul li img {
+    /* 宽度撑满，高度自适应，避免图片拉伸变形 */
+    width: 100%;    
+}
+
+.carousel-control .left {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    padding: 5px;
+    transform: translateY(-50%);
+}
+
+.carousel-control .right {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    padding: 5px;
+    transform: translateY(-50%);
+}
+
+.carousel-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    height: 10px;
+    transform: translateX(-50%);
+}
+
+.carousel-dots li {
+    float: left;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    transition: all .3s;
+    background-color: antiquewhite;
+    list-style: none;
+}
+
+.carousel-dots li.active {
+    background-color: skyblue;
+}
+
