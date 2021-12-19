@@ -46,7 +46,7 @@ class Carousel extends React.Component {
         let { timer } = this.state
         timer = setInterval(() => {
             this.next()
-        }, 2500)
+        }, 5000)
         this.setState({
             timer
         })
