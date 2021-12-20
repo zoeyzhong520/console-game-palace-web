@@ -3,83 +3,106 @@
     padding: 0;
 }
 
-li {
-    list-style: none;
-    border-bottom: 1px solid #ebebeb;
+/* 垂直居中 */
+.w {
+    margin: 0 auto;
 }
 
-a {
-    display: block;
-    min-width: 200px;
-    padding: 10px 0;
+/* 背景区域定宽 */
+.home {
+    width: 1200px;
+}
+
+/* 导航区域：
+    1 logo
+    2 tab栏（加入俱乐部、关于小助手）
+    3 搜索栏
+ */
+.home .nav {
+    height: 100px;
+}
+
+.nav img {
+    float: left;
+    width: 100px;
+}
+
+.nav .tab {
+    float: left;
+}
+
+.nav .tab ul {
+    list-style: none;
+}
+
+.nav .tab ul li {
+    float: left;
+    margin-left: 40px;
+}
+
+.nav .tab ul li a {
+    line-height: 100px;
     text-decoration: none;
     color: #333;
 }
 
-a:hover {
-    background-color: skyblue;
+.nav .tab ul li a:hover {
+    color: #2979ff;
 }
 
-body {
-    background-color: #fff;
-    background-color: #f5f6ff;
-}
-
-.home {
-    display: flex;
-    position: relative;
-}
-
-.home-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 0;
-    text-align: center;
-    background-color: #fff;
-}
-
-.home-left-logo {
-    width: 180px;
-    height: 180px;
-    margin-top: 10px;
-    background-color: skyblue;
-}
-
-.home-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    margin: 0 0 0 30px;
-    background-color: #fff;
-}
-
-.home-content-search-bar {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    padding: 30px 0;
-    width: 100%;
-}
-
-.home-content-search-bar input {
+.nav .search {
     float: left;
-    width: 600px;
-    height: 50px;
-    padding-left: 10px;
-    outline: none;
-    border: 1px solid skyblue;
-    box-sizing: border-box;
+    margin-left: 80px;
+    margin-top: 25px;
 }
 
-.home-content-search-bar button {
-    float: right;
+.nav .search input {
+    width: 390px;
+    height: 48px;
+    padding-left: 10px;
+    color: 	#909399;
+    background: none;
+    outline: none;
+    border: 1px solid #ccc;
+    border-right: 0;
+}
+
+.nav .search input:hover {
+    border: 1px solid #2979ff;
+    border-right: 0;
+}
+
+.nav .search button {
     width: 100px;
     height: 50px;
-    outline: none;
-    background-color: skyblue;
-    color: white;
-    border-style: none;
+    color: #fff;
+    background-color: #2979ff;
+    border: none;
+}
+
+/* 主体区域自动适应高度：
+    1 tabs（动作游戏、射击游戏。。。）
+    2 轮播图
+    3 卡片流布局（游戏推荐、热门文章、关于小助手、加入俱乐部）
+ */
+.home .main {
+    margin-top: 20px;
+}
+
+.home .main .hd {
+    background-color: pink;
+}
+
+.home .main .hd .screening {
+    float: left;
+    width: 200px;
+    height: 500px;
+    background-color: olive;
+}
+
+.home .main .hd .carousel {
+    float: left;
+    width: 1000px;
+    height: 500px;
+    background-color: purple;
 }
