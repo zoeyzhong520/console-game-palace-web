@@ -1,4 +1,5 @@
 import Carousel from './carousel/carousel'
+import { tabsList } from './common'
 import './home.css'
 
 const Home = () => {
@@ -23,10 +24,23 @@ const Home = () => {
     }
 
     const Main = () => {
+        // tabs标签列表
+        const getTabsList = () => {
+            return (
+                tabsList.map(item => {
+                    return <ul>
+                        <li><a href='#'>{item.name}</a></li>
+                    </ul>        
+                })
+            )
+        }
+
         return (
             <div className='main w'>
                 <div className="hd">
-                    <div className="screening"></div>
+                    <div className="screening">
+                        {getTabsList()}
+                    </div>
                     <div className="carousel">
                         <Carousel />
                     </div>

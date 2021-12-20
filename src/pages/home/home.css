@@ -86,7 +86,7 @@
     3 卡片流布局（游戏推荐、热门文章、关于小助手、加入俱乐部）
  */
 .home .main {
-    margin-top: 20px;
+
 }
 
 .home .main .hd {
@@ -95,14 +95,32 @@
 
 .home .main .hd .screening {
     float: left;
-    width: 200px;
-    height: 500px;
-    background-color: olive;
+    width: 250px;
+    background-color: rgba(1, 1, 1, .3);
+    padding: 10px 0;
+}
+
+.home .main .hd .screening ul {
+    float: left;
+    list-style: none; 
+    padding: 0 10px;
+}
+
+.home .main .hd .screening ul li {
+    padding: 10px 20px;
+}
+
+.home .main .hd .screening ul li:hover {
+    background-color: #2979ff;
+}
+
+.home .main .hd .screening ul li a {
+    color: #333;
+    text-decoration: none;
 }
 
 .home .main .hd .carousel {
     float: left;
-    width: 1000px;
-    height: 500px;
-    background-color: purple;
+    width: 950px;
+    height: 440px;
 }

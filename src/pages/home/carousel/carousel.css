@@ -3,7 +3,6 @@
     height: 100%;
     position: relative;
     overflow: hidden;
-    background-color: powderblue;
 }
 
 .carousel .ul {
@@ -39,7 +38,7 @@
 }
 
 .carousel-control .left:hover {
-    background-color: skyblue;
+    background-color: #2979ff;
 }
 
 .carousel-control .right {
@@ -55,7 +54,7 @@
 }
 
 .carousel-control .right:hover {
-    background-color: skyblue;
+    background-color: #2979ff;
 }
 
 .carousel-dots {
@@ -78,6 +77,6 @@
 }
 
 .carousel-dots li.active {
-    background-color: skyblue;
+    background-color: #2979ff;
 }
 

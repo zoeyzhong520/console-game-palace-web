@@ -17,7 +17,8 @@ class Carousel extends React.Component {
                 require('../static/2.jpeg').default,
                 require('../static/3.jpeg').default,
                 require('../static/4.jpeg').default,
-                require('../static/5.jpeg').default
+                require('../static/5.jpeg').default,
+                require('../static/6.jpeg').default
             ],
             index: 0,
             timer: null
