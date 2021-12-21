@@ -1,7 +1,5 @@
 // 标签数组
-export const tabsList = [{
-    name: "热门推荐"
-},
+export const tabsList = [
 {
     name: "动作游戏"
 },

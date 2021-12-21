@@ -46,7 +46,7 @@ const Home = () => {
             return (
                 <div className="section">
                     <h3>{props.title}</h3>
-                    <h5 style={{display: props.showMore ? '' : 'none'}}>更多 &gt;</h5>
+                    <h5 style={{display: props.showMore ? '' : 'none'}}><a href='#'>更多</a></h5>
                 </div>
             )
         }
@@ -130,7 +130,8 @@ const Home = () => {
     const Footer = () => {
         return (
             <div className='footer w'>
-
+                <span>适度游戏益脑，沉迷游戏伤身</span>
+                <span>——我是有底线的——</span>
             </div>
         )
     }

@@ -99,24 +99,26 @@ body {
 
 /* 1+2 hd */
 .home .main .hd {
+    width: 1300px;
     padding-bottom: 20px;
 }
 
 .home .main .hd .screening {
     float: left;
-    width: 250px;
+    width: 305px;
+    height: 450px;
     background-color: rgba(0, 0, 0, .3);
-    padding: 10px 0;
 }
 
 .home .main .hd .screening ul {
     float: left;
     list-style: none;
-    padding: 0 10px;
+    padding: 13px;
 }
 
 .home .main .hd .screening ul li {
-    padding: 10px 20px;
+    padding: 5px;
+    margin-top: 14px;
 }
 
 .home .main .hd .screening ul li:hover {
@@ -130,8 +132,8 @@ body {
 
 .home .main .hd .carousel {
     float: left;
-    width: 950px;
-    height: 440px;
+    width: 895px;
+    height: 450px;
 }
 
 /* 3 bd */
@@ -142,6 +144,15 @@ body {
 
 .home .main .bd .section {
     height: 40px;
+}
+
+.home .main .bd .section a {
+    color: #333;
+    text-decoration: none;
+}
+
+.home .main .bd .section a:hover {
+    color: #2979ff;
 }
 
 .home .main .bd .section h3 {
@@ -253,7 +264,7 @@ body {
     2 我是有底线的
 */
 .home .footer {
-    height: 249px;
+    height: 300px;
     margin-bottom: 20px;
     background-color: pink;
 }
