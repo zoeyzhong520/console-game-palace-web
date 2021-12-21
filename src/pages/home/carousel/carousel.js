@@ -13,20 +13,29 @@ class Carousel extends React.Component {
         super(props)
         this.state = {
             listImg: [
-                require('../static/1.jpeg').default,
-                require('../static/2.jpeg').default,
-                require('../static/3.jpeg').default,
-                require('../static/4.jpeg').default,
-                require('../static/5.jpeg').default,
-                require('../static/6.jpeg').default
+                // require('../static/1.jpeg').default,
+                // require('../static/2.jpeg').default,
+                // require('../static/3.jpeg').default,
+                // require('../static/4.jpeg').default,
+                // require('../static/5.jpeg').default,
+                // require('../static/6.jpeg').default,
+                require('../static/7.jpeg').default
             ],
             index: 0,
-            timer: null
+            timer: null,
+            showElem: false
         }
     }
 
     // 生命周期
     componentDidMount() {
+        // 配置showElem, display属性来控制元素显示和隐藏
+        let { showElem, listImg } = this.state
+        showElem = listImg.length > 1
+        this.setState({
+            showElem
+        })
+
         // 开启定时器
         this.start()
     }
@@ -47,7 +56,7 @@ class Carousel extends React.Component {
         let { timer } = this.state
         timer = setInterval(() => {
             this.next()
-        }, 5000)
+        }, 8000)
         this.setState({
             timer
         })
@@ -102,14 +111,14 @@ class Carousel extends React.Component {
                     )
                 })}
                 </ul>
-                <ul className='carousel-dots'>
+                <ul className='carousel-dots' style={{display: this.state.showElem ? '' : 'none'}}>
                     {this.state.listImg.map((item, imgIndex) => {
                         return (
                             <li className={imgIndex === this.state.index ? 'active' : ''} key={imgIndex} onClick={() => this.indexChange(imgIndex)}></li>
                         )
                     })}
                 </ul>
-                <div className='carousel-control'>
+                <div className='carousel-control' style={{display: this.state.showElem ? '' : 'none'}}>
                     <span className='left' onClick={(e) => this.previous(e)}>上一个</span>
                     <span className='right' onClick={(e) => this.next(e)}>下一个</span>
                 </div>

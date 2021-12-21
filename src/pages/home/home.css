@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body {
+    background-color: #f5f5f5;
+}
+
 /* 垂直居中 */
 .w {
     margin: 0 auto;
@@ -20,6 +24,7 @@
  */
 .home .nav {
     height: 100px;
+    background-color: #fff;
 }
 
 .nav img {
@@ -60,7 +65,7 @@
     width: 390px;
     height: 48px;
     padding-left: 10px;
-    color: 	#909399;
+    color: #909399;
     background: none;
     outline: none;
     border: 1px solid #ccc;
@@ -86,23 +91,27 @@
     3 卡片流布局（游戏推荐、热门文章、关于小助手、加入俱乐部）
  */
 .home .main {
-
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 20px;
 }
 
+/* 1+2 hd */
 .home .main .hd {
-    background-color: pink;
+    padding-bottom: 20px;
 }
 
 .home .main .hd .screening {
     float: left;
     width: 250px;
-    background-color: rgba(1, 1, 1, .3);
+    background-color: rgba(0, 0, 0, .3);
     padding: 10px 0;
 }
 
 .home .main .hd .screening ul {
     float: left;
-    list-style: none; 
+    list-style: none;
     padding: 0 10px;
 }
 
@@ -115,7 +124,7 @@
 }
 
 .home .main .hd .screening ul li a {
-    color: #333;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -123,4 +132,128 @@
     float: left;
     width: 950px;
     height: 440px;
+}
+
+/* 3 bd */
+.home .main .bd {
+    /* 清除浮动 */
+    clear: both;
+}
+
+.home .main .bd .section {
+    height: 40px;
+}
+
+.home .main .bd .section h3 {
+    float: left;
+    line-height: 40px;
+    font-weight: 400;
+    color: #333;
+}
+
+.home .main .bd .section h5 {
+    float: right;
+    line-height: 40px;
+    font-weight: 400;
+    color: #333;
+}
+
+/* .home .main .bd .list {
+    
+} */
+
+.home .main .bd .list .game {
+    height: 360px;
+}
+
+.home .main .bd .list .article {
+    height: 275px;
+}
+
+.home .main .bd .list ul {
+    /* ul设置大些的宽度，便于li标签使用 float: left; 布局 */
+    width: 1300px;
+    list-style: none;
+}
+
+.home .main .bd .list ul li {
+    float: left;
+    width: 285px;
+    margin: 0 20px 20px 0;
+    background-color: #fff;
+}
+
+.home .main .bd .list ul li img {
+    width: 100%;
+    height: 175px;
+}
+
+.home .main .bd .list ul li span {
+    display: block;
+    text-align: center;
+    /* 限制文本行数 */
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    display: -webkit-box;
+    display: box;
+}
+
+.home .main .bd .list .title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 20px;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.home .main .bd .list .description {
+    margin: 20px;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+}
+
+/* aj: about+join
+    关于、加入
+ */
+.home .main .bd .aj {
+    clear: both;
+}
+
+.home .main .bd .aj .about {
+    float: left;
+    width: 285px;
+    height: 437px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.home .main .bd .aj img {
+    width: 100%;
+}
+
+.home .main .bd .aj .about span {
+    display: block;
+    margin: 20px;
+}
+
+.home .main .bd .aj .pic {
+    float: right;
+    width: 895px;
+    height: 437px;
+}
+
+.home .main .bd .pic img {
+    width: 100%;
+    height: 100%;
+}
+
+/* 底部区域 
+    1 适度游戏益脑，沉迷游戏伤身
+    2 我是有底线的
+*/
+.home .footer {
+    height: 249px;
+    margin-bottom: 20px;
+    background-color: pink;
 }

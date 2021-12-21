@@ -1,8 +1,14 @@
-import Carousel from './carousel/carousel'
+import { useState } from 'react'
 import { tabsList } from './common'
+import Carousel from './carousel/carousel'
 import './home.css'
 
 const Home = () => {
+    const [dataSource, setDataSource] = useState({
+        gamesList: [1, 1, 1, 1, 1, 1, 1, 1], // 游戏推荐
+        articlesList: [1, 1, 1, 1, 1, 1, 1, 1] // 热门文章
+    })
+
     const Nav = () => {
         return (
             <div className='nav w'>
@@ -30,8 +36,74 @@ const Home = () => {
                 tabsList.map(item => {
                     return <ul>
                         <li><a href='#'>{item.name}</a></li>
-                    </ul>        
+                    </ul>
                 })
+            )
+        }
+
+        // 列表标题，需传入一个标题, ,props: {title: '', showMore: false}, title标题, showMore是否显示更多
+        const getSectionWithTitle = (props) => {
+            return (
+                <div className="section">
+                    <h3>{props.title}</h3>
+                    <h5 style={{display: props.showMore ? '' : 'none'}}>更多 &gt;</h5>
+                </div>
+            )
+        }
+
+        // 游戏推荐列表
+        const getGamesList = () => {
+            return (
+                <div>
+                    {getSectionWithTitle({title: '游戏推荐', showMore: true})}
+                    <div className='list'>
+                        <ul>
+                            {dataSource.gamesList.map(item => {
+                                return <li className='game'>
+                                    <img src={require('./static/7.jpeg').default} alt="" />
+                                    <span className='title'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+                                    <span className='description'>介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介</span>
+                                </li>
+                            })}
+                        </ul>
+                    </div>
+                </div>
+            )
+        }
+
+        // 热门文章列表
+        const getArticlesList = () => {
+            return (
+                <div style={{ clear: 'both' }}>
+                    {getSectionWithTitle({title: '热门文章', showMore: true})}
+                    <div className='list'>
+                        <ul>
+                            {dataSource.articlesList.map(item => {
+                                return <li className='article'>
+                                    <img src={require('./static/7.jpeg').default} alt="" />
+                                    <span className='title'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+                                </li>
+                            })}
+                        </ul>
+                    </div>
+                </div>
+            )
+        }
+
+        // 其他列表（关于、加入。。。）
+        // props: {title: '', type: 1, description: ''}, title是标题，type是类型（1是关于小助手，2是加入俱乐部）, description是详细描述
+        const getOtherList = (props) => {
+            return (
+                <div className='aj'>
+                    {getSectionWithTitle({title: props.title})}
+                    <div className='about'>
+                        <img src={require(props.type === 1 ? './static/mpCode.jpeg' : './static/wechat.jpeg').default} alt="" />
+                        <span>{props.description}</span>
+                    </div>
+                    <div className='pic'>
+                        <img src={require('./static/7.jpeg').default} alt="" />
+                    </div>
+                </div>
             )
         }
 
@@ -45,6 +117,20 @@ const Home = () => {
                         <Carousel />
                     </div>
                 </div>
+                <div className="bd">
+                    {getGamesList()}
+                    {getArticlesList()}
+                    {getOtherList({title: '关于小助手', type: 1, description: '如果你热爱单机，那么这里就是天堂；如果你刚接触单机，那么这里就是宝库。「单机小助」持续更新优质资源、热门文章，感谢关注和使用！'})}
+                    {getOtherList({title: '加入俱乐部', type: 2, description: '申请加入俱乐部，与游友们一起开心畅谈！'})}
+                </div>
+            </div>
+        )
+    }
+
+    const Footer = () => {
+        return (
+            <div className='footer w'>
+
             </div>
         )
     }
@@ -53,6 +139,7 @@ const Home = () => {
         <div className='home w'>
             <Nav />
             <Main />
+            <Footer />
         </div>
     )
 }
