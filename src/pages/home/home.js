@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { tabsList } from './common'
+import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import Carousel from './carousel/carousel'
 import './home.css'
 
@@ -15,10 +16,10 @@ const Home = () => {
                 <img src={require('./static/logo.png').default} alt=''></img>
                 <div className="tab">
                     <ul>
-                        <li><a href='#'>游戏推荐</a></li>
-                        <li><a href='#'>热门文章</a></li>
-                        <li><a href='#'>关于小助手</a></li>
-                        <li><a href='#'>加入俱乐部</a></li>
+                        <li><a href='#games'>游戏推荐</a></li>
+                        <li><a href='#articles'>热门文章</a></li>
+                        <li><a href='#about'>关于小助手</a></li>
+                        <li><a href='#join'>加入俱乐部</a></li>
                     </ul>
                 </div>
                 <div className="search">
@@ -45,9 +46,20 @@ const Home = () => {
         const getSectionWithTitle = (props) => {
             return (
                 <div className="section">
-                    <h3>{props.title}</h3>
-                    <h5 style={{display: props.showMore ? '' : 'none'}}><a href='#'>更多</a></h5>
+                    <span className='text'><a name={props.name}>{props.title}</a></span>
+                    <span className='more' style={{display: props.showMore ? '' : 'none'}}>
+                        {getSectionLink(props)}
+                    </span>
                 </div>
+            )
+        }
+
+        // Link跳转地址
+        const getSectionLink = (props) => {
+            // 通过 props.name 判断要跳转到的页面路径, name为 games 则跳转到游戏列表, name为 articles 则跳转到文章列表
+            let path = props.name === 'games' ? '/games' : (props.name === 'articles' ? '/articles' : '')
+            return (
+                <CGPNavLink to={path}>更多{'>'}</CGPNavLink>
             )
         }
 
@@ -55,7 +67,7 @@ const Home = () => {
         const getGamesList = () => {
             return (
                 <div>
-                    {getSectionWithTitle({title: '游戏推荐', showMore: true})}
+                    {getSectionWithTitle({title: '游戏推荐', showMore: true, name: 'games'})}
                     <div className='list'>
                         <ul>
                             {dataSource.gamesList.map(item => {
@@ -75,7 +87,7 @@ const Home = () => {
         const getArticlesList = () => {
             return (
                 <div style={{ clear: 'both' }}>
-                    {getSectionWithTitle({title: '热门文章', showMore: true})}
+                    {getSectionWithTitle({title: '热门文章', showMore: true, name: 'articles'})}
                     <div className='list'>
                         <ul>
                             {dataSource.articlesList.map(item => {
@@ -95,7 +107,7 @@ const Home = () => {
         const getOtherList = (props) => {
             return (
                 <div className='aj'>
-                    {getSectionWithTitle({title: props.title})}
+                    {getSectionWithTitle({title: props.title, name: props.type === 1 ? 'about' : 'join'})}
                     <div className='about'>
                         <img src={require(props.type === 1 ? './static/mpCode.jpeg' : './static/wechat.jpeg').default} alt="" />
                         <span>{props.description}</span>
@@ -130,8 +142,8 @@ const Home = () => {
     const Footer = () => {
         return (
             <div className='footer w'>
-                <span>适度游戏益脑，沉迷游戏伤身</span>
-                <span>——我是有底线的——</span>
+                <p className=''>温馨提示：适度游戏益脑，沉迷游戏伤身</p>
+                <p className='bl'>—— 我是有底线的 ——</p>
             </div>
         )
     }
