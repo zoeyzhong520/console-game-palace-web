@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { tabsList } from './common'
-import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
+import { tabsList } from '../common/common'
 import Carousel from './carousel/carousel'
+import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
+import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import './home.css'
 
 const Home = () => {
@@ -22,10 +23,7 @@ const Home = () => {
                         <li><a href='#join'>加入俱乐部</a></li>
                     </ul>
                 </div>
-                <div className="search">
-                    <input type="text" name='search' placeholder='请输入游戏名称' />
-                    <button>搜索</button>
-                </div>
+                <CGPSearchBar />
             </div>
         )
     }

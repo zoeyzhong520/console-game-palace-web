@@ -10,5 +10,44 @@
 
 /* 背景区域定宽 */
 .games {
+    display: flex;
+    flex-direction: column;
+    position: relative;
     width: 1200px;
+}
+
+/* games页:
+    1 tabs(动作游戏、射击游戏。。。)
+    2 gamesList 游戏列表
+*/
+
+.games .nav {
+    
+}
+
+.games .nav ul {
+    list-style: none;
+}
+
+.games .nav ul li {
+    float: left;
+    padding: 20px 0 20px 30px;
+    background-color: #fff;
+}
+
+.games .nav ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.games .nav ul li a:hover {
+    color: #2979ff;
+    border-bottom: 2px solid #2979ff;
+}
+
+.games .main {
+    clear: both;
+    height: 400px;
+    margin-top: 20px;
+    background-color: pink;
 }

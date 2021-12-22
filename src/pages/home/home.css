@@ -56,38 +56,7 @@ body {
 
 .nav .tab ul li a:hover {
     color: #2979ff;
-}
-
-.nav .search {
-    float: right;
-    margin-right: 35px;
-    margin-top: 25px;
-}
-
-.nav .search input {
-    width: 390px;
-    height: 48px;
-    padding-left: 10px;
-    color: #909399;
-    background: none;
-    outline: none;
-    border: 1px solid #ccc;
-    border-right: 0;
-    border-radius:3px 0 0 3px;
-}
-
-.nav .search input:hover {
-    border: 1px solid #2979ff;
-    border-right: 0;
-}
-
-.nav .search button {
-    width: 100px;
-    height: 50px;
-    color: #fff;
-    background-color: #2979ff;
-    border: none;
-    border-radius: 0 3px 3px 0;
+    border-bottom: 2px solid #2979ff;
 }
 
 /* 主体区域自动适应高度：
@@ -170,10 +139,6 @@ body {
     float: right;
     line-height: 40px;
     font-size: 14px;
-}
-
-.home .main .bd .section .active:hover {
-    color: #2979ff;
 }
 
 /* .home .main .bd .list {
