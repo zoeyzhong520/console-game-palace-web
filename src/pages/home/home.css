@@ -34,6 +34,11 @@ body {
     width: 100px;
 }
 
+.nav .search {
+    float: right;
+    margin: 25px 35px 0 0;
+}
+
 .nav .tab {
     float: left;
     margin-left: 40px;
@@ -132,7 +137,7 @@ body {
     float: left;
     line-height: 40px;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .home .main .bd .section .more {

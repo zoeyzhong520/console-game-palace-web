@@ -10,44 +10,148 @@
 
 /* 背景区域定宽 */
 .games {
-    display: flex;
-    flex-direction: column;
-    position: relative;
     width: 1200px;
 }
 
 /* games页:
     1 tabs(动作游戏、射击游戏。。。)
-    2 gamesList 游戏列表
+    2 logo
+    3 searchBar+游戏搜索排行榜（取前20位）
+    4 gamesList 游戏列表
 */
 
+
+/* nav:
+    1 tabs(动作游戏、射击游戏。。。)
+    2 logo
+    3 search bar
+*/
 .games .nav {
-    
-}
-
-.games .nav ul {
-    list-style: none;
-}
-
-.games .nav ul li {
-    float: left;
-    padding: 20px 0 20px 30px;
     background-color: #fff;
 }
 
-.games .nav ul li a {
+.games .nav img {
+    float: left;
+    width: 110px;
+    margin-right: 25px;
+}
+
+.games .nav .tabs {
+    padding-top: 15px;
+}
+
+.games .nav .tabs ul {
+    list-style: none;
+}
+
+.games .nav .tabs ul li {
+    float: left;
+    padding: 0 25px;
+    margin-bottom: 25px;
+    /* 添加左边竖线 */
+    border-left: 1px solid #ccc;
+}
+
+.games .nav .tabs ul li a {
     color: #333;
     text-decoration: none;
 }
 
-.games .nav ul li a:hover {
+.games .nav .tabs ul li a:hover {
     color: #2979ff;
     border-bottom: 2px solid #2979ff;
 }
 
+.games .nav .nav-top {
+    
+}
+
+.games .nav .nav-top img {
+    width: 100px;
+}
+
+.games .nav .nav-bottom {
+    clear: both;
+    height: 50px;
+    padding-bottom: 20px;
+}
+
+.games .nav .nav-bottom .rank {
+    float: left;
+    width: 650px;
+    height: 50px;
+}
+
+.games .nav .nav-bottom .rank span {
+    float: left;
+    font-weight: 700;
+    font-size: 12px;
+    color: #333;
+    line-height: 50px;
+    margin-left: 25px;
+}
+
+.games .nav .nav-bottom .rank ul {
+    list-style: none;    
+}
+
+.games .nav .nav-bottom .rank ul li {
+    float: left;
+    margin-left: 10px;
+}
+
+.games .nav .nav-bottom .rank ul li a {
+    font-size: 10px;
+    color: #333;
+    line-height: 50px;
+    text-decoration: none;
+}
+
+.games .nav .nav-bottom .rank ul li a:hover {
+    color: #2979ff;
+}
+
+.games .nav .nav-bottom .search {
+    float: right;
+    margin: 0 25px 0 0;
+}
+
+/* main:
+    4 gamesList 游戏列表
+ */
 .games .main {
     clear: both;
-    height: 400px;
     margin-top: 20px;
+}
+
+.games .main .gamePic {
+    float: left;
+    width: 400px;
+    height: 250px;
+}
+
+.games .main img {
+    width: 100%;
+    height: 100%;
+}
+
+.games .main .content {
+    float: left;
+    width: 800px;
+    height: 250px;
     background-color: pink;
+}
+
+.games .main .gameName {
+    
+}
+
+.games .main ul {
+    list-style: none;
+}
+
+.games .main ul li {
+    float: left;
+    height: 250px;
+    margin-bottom: 20px;
 }

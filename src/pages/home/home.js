@@ -23,7 +23,7 @@ const Home = () => {
                         <li><a href='#join'>加入俱乐部</a></li>
                     </ul>
                 </div>
-                <CGPSearchBar />
+                <CGPSearchBar className='search' />
             </div>
         )
     }
