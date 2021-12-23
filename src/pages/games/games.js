@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { tabsList } from '../common/common'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
+import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import './games.css'
 
 const Games = () => {
     const [dataSource, setDataSource] = useState({
         rankList: [1, 1, 1, 1], // 游戏搜索排行
-        gamesList: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] // 游戏列表
+        gamesList: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] // 游戏列表
     })
 
     // 导航菜单
@@ -66,8 +67,8 @@ const Games = () => {
                                 <img src={require('../home/static/7.jpeg').default} />
                             </div>
                             <div className='content'>
-                                <span className='gameName'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
-                                <span className='gameDesc'>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</span>
+                                <p className='gameName'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>
+                                <p className='gameDesc'>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
                                 <a href='#'>查看详情</a>
                             </div>
                         </li>
@@ -80,6 +81,7 @@ const Games = () => {
     return <div className='games w'>
         <Nav />
         <Main />
+        <CGPBottomLine />
     </div>
 }
 

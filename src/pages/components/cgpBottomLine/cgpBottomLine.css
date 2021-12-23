@@ -1,0 +1,15 @@
+.bottomLine {
+    clear: both;
+    padding: 40px 0 20px 0;
+}
+
+.bottomLine p {
+    color: #999;
+    text-align: center;
+}
+
+.bottomLine .bl {
+    font-size: 12px;
+    color: #999;
+    margin-top: 20px;
+}

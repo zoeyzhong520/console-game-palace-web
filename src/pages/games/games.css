@@ -28,6 +28,7 @@
 */
 .games .nav {
     background-color: #fff;
+    border-radius: 0 0 3px 3px;
 }
 
 .games .nav img {
@@ -121,29 +122,20 @@
  */
 .games .main {
     clear: both;
+    width: 1300px;
     margin-top: 20px;
 }
 
 .games .main .gamePic {
     float: left;
-    width: 400px;
-    height: 250px;
+    width: 250px;
+    height: 155px;
 }
 
 .games .main img {
     width: 100%;
     height: 100%;
-}
-
-.games .main .content {
-    float: left;
-    width: 800px;
-    height: 250px;
-    background-color: pink;
-}
-
-.games .main .gameName {
-    
+    border-radius: 3px 0 0 3px;
 }
 
 .games .main ul {
@@ -152,6 +144,53 @@
 
 .games .main ul li {
     float: left;
-    height: 250px;
-    margin-bottom: 20px;
+    height: 155px;
+    margin: 0 20px 20px 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.games .main .content {
+    float: left;
+    width: 340px;
+    height: 155px;
+    background-color: #fff;
+}
+
+.games .main .content p {
+    /* 限制文本行数 */
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    display: -webkit-box;
+    display: box;
+}
+
+.games .main .content .gameName {
+    margin: 10px;
+    font-weight: 700;
+    /* 限制两行 */
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.games .main .content .gameDesc {
+    margin: 0 10px 10px 10px;
+    font-size: 12px;
+    /* 限制三行 */
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+}
+
+.games .main .content a {
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 12px;
+    text-decoration: none;
+    border-radius: 3px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.games .main .content a:hover {
+    background-color: #2979ff;
 }

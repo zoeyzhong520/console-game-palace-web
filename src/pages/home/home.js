@@ -3,6 +3,7 @@ import { tabsList } from '../common/common'
 import Carousel from './carousel/carousel'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
+import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import './home.css'
 
 const Home = () => {
@@ -137,20 +138,11 @@ const Home = () => {
         )
     }
 
-    const Footer = () => {
-        return (
-            <div className='footer w'>
-                <p className=''>温馨提示：适度游戏益脑，沉迷游戏伤身</p>
-                <p className='bl'>—— 我是有底线的 ——</p>
-            </div>
-        )
-    }
-
     return (
         <div className='home w'>
             <Nav />
             <Main />
-            <Footer />
+            <CGPBottomLine />
         </div>
     )
 }
