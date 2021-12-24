@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { tabsList } from '../common/common'
-import Carousel from './carousel/carousel'
+import Carousel from '../components/carousel/carousel'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
@@ -35,7 +35,14 @@ const Home = () => {
             return (
                 tabsList.map(item => {
                     return <ul>
-                        <li><a href='#'>{item.name}</a></li>
+                        <li>
+                            <CGPNavLink to={{
+                                pathname: '/games',
+                                state: {
+                                    type: 'A'
+                                }
+                            }}>{item.name}</CGPNavLink>
+                        </li>
                     </ul>
                 })
             )
@@ -46,7 +53,7 @@ const Home = () => {
             return (
                 <div className="section">
                     <span className='text'><a name={props.name}>{props.title}</a></span>
-                    <span className='more' style={{display: props.showMore ? '' : 'none'}}>
+                    <span className='more' style={{ display: props.showMore ? '' : 'none' }}>
                         {getSectionLink(props)}
                     </span>
                 </div>
@@ -66,7 +73,7 @@ const Home = () => {
         const getGamesList = () => {
             return (
                 <div>
-                    {getSectionWithTitle({title: '游戏推荐', showMore: true, name: 'games'})}
+                    {getSectionWithTitle({ title: '游戏推荐', showMore: true, name: 'games' })}
                     <div className='list'>
                         <ul>
                             {dataSource.gamesList.map(item => {
@@ -86,7 +93,7 @@ const Home = () => {
         const getArticlesList = () => {
             return (
                 <div style={{ clear: 'both' }}>
-                    {getSectionWithTitle({title: '热门文章', showMore: true, name: 'articles'})}
+                    {getSectionWithTitle({ title: '热门文章', showMore: true, name: 'articles' })}
                     <div className='list'>
                         <ul>
                             {dataSource.articlesList.map(item => {
@@ -106,7 +113,7 @@ const Home = () => {
         const getOtherList = (props) => {
             return (
                 <div className='aj'>
-                    {getSectionWithTitle({title: props.title, name: props.type === 1 ? 'about' : 'join'})}
+                    {getSectionWithTitle({ title: props.title, name: props.type === 1 ? 'about' : 'join' })}
                     <div className='about'>
                         <img src={require(props.type === 1 ? './static/mpCode.jpeg' : './static/wechat.jpeg').default} alt="" />
                         <span>{props.description}</span>
@@ -131,8 +138,8 @@ const Home = () => {
                 <div className="bd">
                     {getGamesList()}
                     {getArticlesList()}
-                    {getOtherList({title: '关于小助手', type: 1, description: '如果你热爱单机，那么这里就是天堂；如果你刚接触单机，那么这里就是宝库。「单机小助」持续更新优质资源、热门文章，感谢关注和使用！'})}
-                    {getOtherList({title: '加入俱乐部', type: 2, description: '申请加入俱乐部，与游友们一起开心畅谈！'})}
+                    {getOtherList({ title: '关于小助手', type: 1, description: '如果你热爱单机，那么这里就是天堂；如果你刚接触单机，那么这里就是宝库。「单机小助」持续更新优质资源、热门文章，感谢关注和使用！' })}
+                    {getOtherList({ title: '加入俱乐部', type: 2, description: '申请加入俱乐部，与游友们一起开心畅谈！' })}
                 </div>
             </div>
         )

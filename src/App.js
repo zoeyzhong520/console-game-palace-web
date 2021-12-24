@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Switch, Route, Routes,  NavLink } from 'react-
 import Home from './pages/home/home'
 import Games from './pages/games/games'
 import Articles from './pages/articles/articles'
+import GamesDetail from './pages/detail/gamesDetail/gamesDetail'
+import ArticlesDetail from './pages/detail/articlesDetail/articlesDetail'
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/games' element={<Games />} />
           <Route path='/articles' element={<Articles />} />
+          <Route path='/gamesDetail' element={<GamesDetail />} />
+          <Route path='/articlesDetail' element={<ArticlesDetail />} />
         </Routes>
       </div>
     </Router>

@@ -1,56 +1,74 @@
 // 标签数组
 export const tabsList = [
 {
-    name: "动作游戏"
+    name: "动作游戏",
+    type: 'A'
 },
 {
-    name: "射击游戏"
+    name: "射击游戏",
+    type: 'B'
 },
 {
-    name: "角色扮演"
+    name: "角色扮演",
+    type: 'C'
 },
 {
-    name: "动作冒险"
+    name: "动作冒险",
+    type: 'D'
 },
 {
-    name: "冒险解谜"
+    name: "冒险解谜",
+    type: 'E'
 },
 {
-    name: "格斗游戏"
+    name: "格斗游戏",
+    type: 'F'
 },
 {
-    name: "赛车竞技"
+    name: "赛车竞技",
+    type: 'G'
 },
 {
-    name: "模拟经营"
+    name: "模拟经营",
+    type: 'H'
 },
 {
-    name: "即时战略"
+    name: "即时战略",
+    type: 'I'
 },
 {
-    name: "文字游戏"
+    name: "文字游戏",
+    type: 'J'
 },
 {
-    name: "恐怖冒险"
+    name: "恐怖冒险",
+    type: 'K'
 },
 {
-    name: "休闲益智"
+    name: "休闲益智",
+    type: 'L'
 },
 {
-    name: "音乐游戏"
+    name: "音乐游戏",
+    type: 'M'
 },
 {
-    name: "策略游戏"
+    name: "策略游戏",
+    type: 'N'
 },
 {
-    name: "生存冒险"
+    name: "生存冒险",
+    type: 'O'
 },
 {
-    name: "卡通可爱"
+    name: "卡通可爱",
+    type: 'P'
 },
 {
-    name: "体育竞技"
+    name: "体育竞技",
+    type: 'Q'
 },
 {
-    name: "街机游戏"
+    name: "街机游戏",
+    type: 'R'
 }]

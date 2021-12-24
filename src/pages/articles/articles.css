@@ -12,3 +12,91 @@
 .articles {
     width: 1200px;
 }
+
+/* Nav导航区域 —— 待定
+   Main主区域 —— 文章列表
+ */
+.articles .nav {
+    height: 100px;
+    background-color: #fff;
+}
+
+.articles .nav .logo {
+    float: left;
+    width: 100px;
+    height: 100%;
+}
+
+.articles .nav .random {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 306px;
+    height: 100%;
+}
+
+.articles .nav .random p {
+    text-align: center;
+    border-left: 1px solid #ccc;
+    padding-left: 20px;
+}
+
+.articles .nav .random p a {
+    color: #333;
+    text-decoration: none;
+}
+
+.articles .nav .random p a:hover {
+    color: #2979ff;
+}
+
+.articles .nav .carousel {
+    float: left;
+    width: 794px;
+    height: 100%;
+}
+
+.articles .main {
+    margin-top: 20px;
+}
+
+.articles .main .articles-list {}
+
+.articles .main .articles-list ul {
+    width: 1300px;
+    list-style: none;
+}
+
+.articles .main .articles-list ul li {
+    float: left;
+    width: 386px;
+    height: 310px;
+    margin: 0 21px 20px 0;
+    background-color: #fff;
+}
+
+.articles .main .articles-list ul li img {
+    width: 100%;
+    height: 240px;
+}
+
+.articles .main .articles-list ul li p {
+    margin: 10px;
+    text-align: center;
+    font-weight: 700;
+    /* 限制文本行数 */
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    display: -webkit-box;
+    display: box;
+    /* 限制两行 */
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.articles .main .articles-list ul li a {
+    text-decoration: none;
+    color: #333;
+}

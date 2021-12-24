@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 垂直居中 */
+.w {
+    margin: 0 auto;
+}
+
+/* 背景区域定宽 */
+.articlesDetail {
+    width: 1200px;
+}

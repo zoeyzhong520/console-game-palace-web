@@ -4,11 +4,15 @@ import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import './games.css'
 
-const Games = () => {
+const Games = (props) => {
     const [dataSource, setDataSource] = useState({
         rankList: [1, 1, 1, 1], // 游戏搜索排行
         gamesList: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] // 游戏列表
     })
+
+    useState(() => {
+        console.log(props.location)
+    }, [])
 
     // 导航菜单
     const Nav = () => {
