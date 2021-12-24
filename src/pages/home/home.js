@@ -36,12 +36,7 @@ const Home = () => {
                 tabsList.map(item => {
                     return <ul>
                         <li>
-                            <CGPNavLink to={{
-                                pathname: '/games',
-                                state: {
-                                    type: 'A'
-                                }
-                            }}>{item.name}</CGPNavLink>
+                            <CGPNavLink to={{pathname: '/games/'+item.type}}>{item.name}</CGPNavLink>
                         </li>
                     </ul>
                 })

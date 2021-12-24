@@ -1,18 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { tabsList } from '../common/common'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import './games.css'
+import { useParams } from 'react-router-dom'
 
-const Games = (props) => {
+const Games = () => {
+    // useParams接收路由参数
+    const { type } = useParams()
+    
     const [dataSource, setDataSource] = useState({
         rankList: [1, 1, 1, 1], // 游戏搜索排行
         gamesList: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] // 游戏列表
     })
 
-    useState(() => {
-        console.log(props.location)
-    }, [])
+    useEffect(() => {
+        console.log('useEffect')
+        alert(type)
+    })
 
     // 导航菜单
     const Nav = () => {
@@ -22,7 +27,7 @@ const Games = (props) => {
                 <div className='tabs'>
                     {tabsList.map(item => {
                         return <ul>
-                            <li><a href='#'>{item.name}</a></li>
+                            <li key={item}><a href='#'>{item.name}</a></li>
                         </ul>
                     })}
                 </div>
@@ -39,7 +44,7 @@ const Games = (props) => {
                     <span>热门搜索：</span>
                     {dataSource.rankList.map(item => {
                         return <ul>
-                            <li><a href='#'>{'∙'}标题标题标题标题标题</a></li>
+                            <li key={item}><a href='#'>{'∙'}标题标题标题标题标题</a></li>
                         </ul>
                     })}
                 </div>
@@ -66,7 +71,7 @@ const Games = (props) => {
             <div className='main'>
                 {dataSource.gamesList.map(item => {
                     return <ul>
-                        <li>
+                        <li key={item}>
                             <div className='gamePic'>
                                 <img src={require('../home/static/7.jpeg').default} />
                             </div>
