@@ -36,14 +36,14 @@ const Home = () => {
                 tabsList.map(item => {
                     return <ul>
                         <li>
-                            <CGPNavLink to={{pathname: '/games/'+item.type}}>{item.name}</CGPNavLink>
+                            <CGPNavLink to={{ pathname: '/games/' + item.type }}>{item.name}</CGPNavLink>
                         </li>
                     </ul>
                 })
             )
         }
 
-        // 列表标题，需传入一个标题, ,props: {title: '', showMore: false}, title标题, showMore是否显示更多
+        // 列表标题，需传入一个标题, props: {title: '', showMore: false}, title标题, showMore是否显示更多
         const getSectionWithTitle = (props) => {
             return (
                 <div className="section">
@@ -55,16 +55,15 @@ const Home = () => {
             )
         }
 
-        // Link跳转地址
         const getSectionLink = (props) => {
             // 通过 props.name 判断要跳转到的页面路径, name为 games 则跳转到游戏列表, name为 articles 则跳转到文章列表
-            let path = props.name === 'games' ? '/games' : (props.name === 'articles' ? '/articles' : '')
+            let path = props.name === 'games' ? '/games/All' : (props.name === 'articles' ? '/articles' : '')
             return (
                 <CGPNavLink to={path}>更多{'>'}</CGPNavLink>
             )
         }
 
-        // 游戏推荐列表
+        // 游戏推荐列表，点击打开对应的游戏详情
         const getGamesList = () => {
             return (
                 <div>
@@ -73,9 +72,11 @@ const Home = () => {
                         <ul>
                             {dataSource.gamesList.map(item => {
                                 return <li className='game'>
-                                    <img src={require('./static/7.jpeg').default} alt="" />
-                                    <span className='title'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
-                                    <span className='description'>介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介</span>
+                                    <CGPNavLink to='/gamesDetail'>
+                                        <img src={require('./static/7.jpeg').default} alt="" />
+                                        <span className='title'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+                                        <span className='description'>介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介</span>
+                                    </CGPNavLink>
                                 </li>
                             })}
                         </ul>
