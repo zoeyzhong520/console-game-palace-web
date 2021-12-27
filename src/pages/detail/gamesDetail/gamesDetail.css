@@ -12,3 +12,32 @@
 .gamesDetail {
     width: 1200px;
 }
+
+/* 详情页面分以下部分
+    1 游戏标题
+    2 下载地址
+    3 游戏简介
+    4 系统需求
+ */
+.gamesDetail .title {
+    height: 200px;
+    background-color: pink;
+}
+
+.gamesDetail .source {
+    height: 200px;
+    margin-top: 20px;
+    background-color: pink;
+}
+
+.gamesDetail .description {
+    height: 200px;
+    margin-top: 20px;
+    background-color: pink;
+}
+
+.gamesDetail .requirements {
+    height: 200px;
+    margin-top: 20px;
+    background-color: pink;
+}

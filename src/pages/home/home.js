@@ -35,7 +35,7 @@ const Home = () => {
             return (
                 tabsList.map(item => {
                     return <ul>
-                        <li>
+                        <li key={item}>
                             <CGPNavLink to={{ pathname: '/games/' + item.type }}>{item.name}</CGPNavLink>
                         </li>
                     </ul>
@@ -45,21 +45,15 @@ const Home = () => {
 
         // 列表标题，需传入一个标题, props: {title: '', showMore: false}, title标题, showMore是否显示更多
         const getSectionWithTitle = (props) => {
-            return (
-                <div className="section">
-                    <span className='text'><a name={props.name}>{props.title}</a></span>
-                    <span className='more' style={{ display: props.showMore ? '' : 'none' }}>
-                        {getSectionLink(props)}
-                    </span>
-                </div>
-            )
-        }
-
-        const getSectionLink = (props) => {
             // 通过 props.name 判断要跳转到的页面路径, name为 games 则跳转到游戏列表, name为 articles 则跳转到文章列表
             let path = props.name === 'games' ? '/games/All' : (props.name === 'articles' ? '/articles' : '')
             return (
-                <CGPNavLink to={path}>更多{'>'}</CGPNavLink>
+                <div className="section">
+                    <span className='text'><a name={props.name}>{props.title}</a></span>
+                    <CGPNavLink to={path}>
+                        <span className='more' style={{ display: props.showMore ? '' : 'none' }}>更多{'>'}</span>
+                    </CGPNavLink>
+                </div>
             )
         }
 
@@ -71,7 +65,7 @@ const Home = () => {
                     <div className='list'>
                         <ul>
                             {dataSource.gamesList.map(item => {
-                                return <li className='game'>
+                                return <li key={item} className='game'>
                                     <CGPNavLink to='/gamesDetail'>
                                         <img src={require('./static/7.jpeg').default} alt="" />
                                         <span className='title'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
@@ -93,9 +87,11 @@ const Home = () => {
                     <div className='list'>
                         <ul>
                             {dataSource.articlesList.map(item => {
-                                return <li className='article'>
-                                    <img src={require('./static/7.jpeg').default} alt="" />
-                                    <span className='title'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+                                return <li key={item} className='article'>
+                                    <CGPNavLink to='/articlesDetail'>
+                                        <img src={require('./static/7.jpeg').default} alt="" />
+                                        <span className='title'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+                                    </CGPNavLink>
                                 </li>
                             })}
                         </ul>

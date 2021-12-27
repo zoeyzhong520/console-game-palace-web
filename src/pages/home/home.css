@@ -154,8 +154,16 @@ body {
     height: 360px;
 }
 
+.home .main .bd .list .game a {
+    text-decoration: none;
+}
+
 .home .main .bd .list .article {
     height: 275px;
+}
+
+.home .main .bd .list .article a {
+    text-decoration: none;
 }
 
 .home .main .bd .list ul {
