@@ -13,31 +13,75 @@
     width: 1200px;
 }
 
+.gamesDetail .main {
+    margin-bottom: 20px;
+}
+
 /* 详情页面分以下部分
     1 游戏标题
     2 下载地址
     3 游戏简介
     4 系统需求
+    5 游戏截图
  */
+
+ /* 游戏标题 */
 .gamesDetail .title {
-    height: 200px;
     background-color: pink;
 }
 
-.gamesDetail .source {
-    height: 200px;
+.gamesDetail .title p {
+    margin: 0 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+}
+
+.gamesDetail .title .updateTime {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
     margin-top: 20px;
-    background-color: pink;
 }
 
+/* 游戏简介 */
 .gamesDetail .description {
-    height: 200px;
     margin-top: 20px;
     background-color: pink;
 }
 
-.gamesDetail .requirements {
-    height: 200px;
+.gamesDetail .description p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* 游戏截图 */
+.gamesDetail .screenshots {
     margin-top: 20px;
     background-color: pink;
 }
+
+.gamesDetail .screenshots img {
+    /* 宽高自适应 */
+    height: 100%;
+}
+
+/* 系统需求 */
+.gamesDetail .requirements {
+    margin-top: 20px;
+    background-color: pink;
+}
+
+.gamesDetail .requirements p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* 资源地址 */
+.gamesDetail .source {
+    margin-top: 20px;
+    background-color: pink;
+}
+
+
