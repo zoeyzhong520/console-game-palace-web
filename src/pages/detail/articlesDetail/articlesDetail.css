@@ -12,3 +12,36 @@
 .articlesDetail {
     width: 1200px;
 }
+
+.articlesDetail .nav {
+    position: relative;
+    height: 100px;
+    background-color: #fff;
+}
+
+.articlesDetail .nav img {
+    /* 让logo使用绝对定位，位置居左 */
+    position: absolute;
+    width: 100px;
+    height: 100px;
+}
+
+.articlesDetail .nav .title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+}
+
+.articlesDetail .nav p {
+    line-height: 50px;
+    text-align: center;
+    color: #666;
+}
+
+.articlesDetail .main {
+    padding: 20px 0;
+    margin-top: 20px;
+    /* 让子元素垂直居中 */
+    text-align: center;
+    background-color: #fff;
+}

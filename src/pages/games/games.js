@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { tabsList } from '../common/common'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
+import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import './games.css'
-import { useParams } from 'react-router-dom'
 
 const Games = () => {
     // useParams接收路由参数
@@ -78,7 +79,7 @@ const Games = () => {
                             <div className='content'>
                                 <p className='gameName'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>
                                 <p className='gameDesc'>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
-                                <a href='#'>查看详情</a>
+                                <CGPNavLink to='/gamesDetail'>查看详情</CGPNavLink>
                             </div>
                         </li>
                     </ul>

@@ -13,8 +13,28 @@
     width: 1200px;
 }
 
+/* Nav区域：
+    1 logo
+    2 readCount内容阅读次数（Bmob后台有相关统计数据）
+*/
+.gamesDetail .nav {
+    height: 100px;
+    background-color: #fff;
+}
+
+.gamesDetail .nav img {
+    width: 100px;
+    height: 100px;
+}
+
+.gamesDetail .nav p {
+    line-height: 50px;
+    color: #333;
+    text-align: center;
+}
+
 .gamesDetail .main {
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 /* 详情页面分以下部分

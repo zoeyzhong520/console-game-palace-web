@@ -182,9 +182,10 @@
 }
 
 .games .main .content a {
-    padding: 5px;
+    padding: 5px 20px;
     margin-left: 10px;
     font-size: 12px;
+    font-weight: 700;
     text-decoration: none;
     border-radius: 3px;
     color: #fff;

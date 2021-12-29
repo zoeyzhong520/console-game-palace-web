@@ -5,6 +5,16 @@ import CGPBottomLine from '../../components/cgpBottomLine/cgpBottomLine'
 import './gamesDetail.css'
 
 const GamesDetail = () => {
+    const Nav = () => {
+        return (
+            <div className='nav'>
+                <img src={require('../../home/static/logo.png').default} alt='' />
+                <p>根据小助的精心统计，这款游戏已经一共被查看了88次。</p>
+                <p>当然数据只能在一定程度上体现热门程度，实际表现如何更加依赖于你的品味。</p>
+            </div>
+        )
+    }
+
     const Main = () => {
         // 游戏标题
         const Title = () => {
@@ -66,6 +76,7 @@ const GamesDetail = () => {
 
     return (
         <div className="gamesDetail w">
+            <Nav />
             <Main />
             <CGPBottomLine />
         </div>
