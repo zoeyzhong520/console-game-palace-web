@@ -17,8 +17,13 @@
     1 logo
     2 readCount内容阅读次数（Bmob后台有相关统计数据）
 */
+.gamesDetail p {
+    padding: 0 20px;
+}
+
 .gamesDetail .nav {
     height: 100px;
+    border-radius: 0 0 3px 3px;
     background-color: #fff;
 }
 
@@ -34,7 +39,10 @@
 }
 
 .gamesDetail .main {
+    padding: 20px 0;
     margin: 20px 0;
+    border-radius: 3px;
+    background-color: #fff;
 }
 
 /* 详情页面分以下部分
@@ -47,7 +55,7 @@
 
  /* 游戏标题 */
 .gamesDetail .title {
-    background-color: pink;
+    background-color: #fff;
 }
 
 .gamesDetail .title p {
@@ -68,7 +76,7 @@
 /* 游戏简介 */
 .gamesDetail .description {
     margin-top: 20px;
-    background-color: pink;
+    background-color: #fff;
 }
 
 .gamesDetail .description p {
@@ -78,8 +86,9 @@
 
 /* 游戏截图 */
 .gamesDetail .screenshots {
-    margin-top: 20px;
-    background-color: pink;
+    margin: 20px;
+    background-color: #fff;
+    text-align: center;
 }
 
 .gamesDetail .screenshots img {
@@ -90,7 +99,7 @@
 /* 系统需求 */
 .gamesDetail .requirements {
     margin-top: 20px;
-    background-color: pink;
+    background-color: #fff;
 }
 
 .gamesDetail .requirements p {
@@ -101,7 +110,7 @@
 /* 资源地址 */
 .gamesDetail .source {
     margin-top: 20px;
-    background-color: pink;
+    background-color: #fff;
 }
 
 

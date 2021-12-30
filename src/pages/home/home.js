@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { tabsList } from '../common/common'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { tabsList, cgp_recommend_banner_list } from '../common/common'
 import Carousel from '../components/carousel/carousel'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
@@ -7,10 +8,29 @@ import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import './home.css'
 
 const Home = () => {
+    const navigate = useNavigate()
+
     const [dataSource, setDataSource] = useState({
         gamesList: [1, 1, 1, 1, 1, 1, 1, 1], // 游戏推荐
-        articlesList: [1, 1, 1, 1, 1, 1, 1, 1] // 热门文章
+        articlesList: [1, 1, 1, 1, 1, 1, 1, 1], // 热门文章
+        bannerList: []
     })
+    useEffect(() => {
+
+    }, [])
+
+    // 广告位数据
+    const [bannerList, setBannerList] = useState([])
+    useEffect(() => {
+        // API
+        const apiRequest = () => {
+            // 获取广告位数据
+            cgp_recommend_banner_list().then(res => {
+                setBannerList(res)
+            })
+        }
+        apiRequest()
+    }, [])
 
     const Nav = () => {
         return (
@@ -117,6 +137,20 @@ const Home = () => {
             )
         }
 
+        // 广告位点击
+        const clickCarousel = (imgIndex) => {
+            // 点击广告位打开游戏详情
+            navigate('/gamesDetail', { state: bannerList[imgIndex], replace: false })
+        }
+
+        const getCarouselImgs = () => {
+            let imgs = []
+            bannerList.map(item => {
+                imgs.push(item.image)
+            })
+            return imgs
+        }
+
         return (
             <div className='main w'>
                 <div className="hd">
@@ -124,7 +158,7 @@ const Home = () => {
                         {getTabsList()}
                     </div>
                     <div className="carousel">
-                        <Carousel />
+                        <Carousel listImg={getCarouselImgs()} imgWidth='895px' imgHeight='450px' onClick={(imgIndex) => clickCarousel(imgIndex)} />
                     </div>
                 </div>
                 <div className="bd">

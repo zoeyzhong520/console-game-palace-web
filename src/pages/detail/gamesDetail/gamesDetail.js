@@ -1,16 +1,27 @@
 /*
 games游戏详情页
 */
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react/cjs/react.development'
+import { useDangerouslySetInnerHTML } from '../../common/common'
 import CGPBottomLine from '../../components/cgpBottomLine/cgpBottomLine'
 import './gamesDetail.css'
 
 const GamesDetail = () => {
+    const location = useLocation()
+
+    const [dataSource, setDataSource] = useState({})
+
+    useEffect(() => {
+        setDataSource(location.state)
+    }, [])
+
     const Nav = () => {
         return (
             <div className='nav'>
                 <img src={require('../../home/static/logo.png').default} alt='' />
-                <p>根据小助的精心统计，这款游戏已经一共被查看了88次。</p>
-                <p>当然数据只能在一定程度上体现热门程度，实际表现如何更加依赖于你的品味。</p>
+                <p>根据小助的精心统计分析，这款游戏已经一共被查看了888次了。</p>
+                <p>当然数据只能从一定程度体现热门程度，实际表现期待你的体验。</p>
             </div>
         )
     }
@@ -20,8 +31,8 @@ const GamesDetail = () => {
         const Title = () => {
             return (
                 <div className="title">
-                    <p>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>
-                    <p className='updateTime'>时间时间时间时间时间时间</p>
+                    <p>{dataSource.title}</p>
+                    <p className='updateTime'>{dataSource.createdAt}</p>
                 </div>
             )
         }
@@ -30,7 +41,7 @@ const GamesDetail = () => {
         const Description = () => {
             return (
                 <div className="description">
-                    <p>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+                    <p>{dataSource.description}</p>
                 </div>
             )
         }
@@ -39,7 +50,10 @@ const GamesDetail = () => {
         const Screenshots = () => {
             return (
                 <div className="screenshots">
-                    <img src={require('../../home/static/7.jpeg').default} alt='' />
+                    {/* 调用map的对象是 undefined，初始化第一次渲染的时候异步数据返回之前checkarr是undefined */}
+                    {dataSource.imageList && dataSource.imageList.map(item => {
+                        return <img src={item} alt='' />
+                    })}
                 </div>
             )
         }
@@ -48,7 +62,7 @@ const GamesDetail = () => {
         const Requirements = () => {
             return (
                 <div className="requirements">
-                    <p>需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求需求</p>
+                    <p>{dataSource.requirements}</p>
                 </div>
             )
         }
@@ -57,8 +71,9 @@ const GamesDetail = () => {
         const Source = () => {
             return (
                 <div className="source">
-                    <p>百度云：<a href='#'>xxxxxxxxxxxxxxxxxxxx</a></p>
-                    <p>天翼云：<a href='#'>xxxxxxxxxxxxxxxxxxxx</a></p>
+                    <p>百度云：<a href={dataSource.baiduUrl}>{dataSource.baiduUrl}</a></p>
+                    <p style={{ margin: '0 0 20px 0' }}>天翼云：<a href={dataSource.tyUrl}>{dataSource.tyUrl}</a></p>
+                    {useDangerouslySetInnerHTML(dataSource.resources)}
                 </div>
             )
         }

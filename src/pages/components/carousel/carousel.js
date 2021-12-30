@@ -12,32 +12,37 @@ class Carousel extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            listImg: [
-                // require('../static/1.jpeg').default,
-                // require('../static/2.jpeg').default,
-                // require('../static/3.jpeg').default,
-                // require('../static/4.jpeg').default,
-                // require('../static/5.jpeg').default,
-                // require('../static/6.jpeg').default,
-                require('../../home/static/7.jpeg').default
-            ],
-            index: 0,
-            timer: null,
-            showElem: false
+            listImg: [],        // 图片数组
+            index: 0,           // 图片下标
+            timer: null,        // 定时器
+            showElem: false,    // 布尔变量
+            imgWidth: '100%',   // 图片宽
+            imgHeight: '100%'   // 图片高
         }
     }
 
     // 生命周期
     componentDidMount() {
-        // 配置showElem, display属性来控制元素显示和隐藏
-        let { showElem, listImg } = this.state
+        /*
+        1 配置listImg
+        2 配置showElem, display属性来控制元素显示和隐藏
+        3 配置imgWidth、imgHeight
+        */
+        let { showElem, listImg, imgWidth, imgHeight } = this.state
+        listImg = this.props.listImg
+        imgWidth = this.props.imgWidth
+        imgHeight = this.props.imgHeight
         showElem = listImg.length > 1
-        this.setState({
-            showElem
-        })
 
-        // 开启定时器
-        this.start()
+        this.setState({
+            listImg,
+            imgWidth,
+            imgHeight,
+            showElem
+        }, () => {
+            // 开启定时器
+            this.start()
+        })
     }
 
     componentWillUnmount() {
@@ -53,6 +58,12 @@ class Carousel extends React.Component {
 
     // 开始
     start = () => {
+        console.log(this.state.listImg)
+        // 当图片数量<=1时无需启动定时器
+        if (this.state.listImg.length <= 1) {
+            return
+        }
+
         let { timer } = this.state
         timer = setInterval(() => {
             this.next()
@@ -66,10 +77,10 @@ class Carousel extends React.Component {
     next = (e) => {
         let ev = e
         let { listImg, index } = this.state
-        if (index >= listImg.length-1) {
+        if (index >= listImg.length - 1) {
             index = 0
         } else {
-            index ++
+            index++
         }
         this.setState({
             index
@@ -81,9 +92,9 @@ class Carousel extends React.Component {
         let ev = e
         let { listImg, index } = this.state
         if (index <= 0) {
-            index = listImg.length-1
+            index = listImg.length - 1
         } else {
-            index --
+            index--
         }
         this.setState({
             index
@@ -99,26 +110,37 @@ class Carousel extends React.Component {
         })
     }
 
+    // 图片点击
+    onClick = (imgIndex) => {
+        /*
+        1 通过props发送出去一个方法
+        2 把点击的图片下标传递出去
+        */
+        this.props.onClick(imgIndex)
+    }
+
     render() {
         return (
             <div className='carousel'>
                 <ul className='ul'>
-                {this.state.listImg.map((item, imgIndex) => {
-                    return (
-                        <li className={imgIndex === this.state.index ? 'show' : ''} key={imgIndex}>
-                            <img src={item} alt='' />
-                        </li>
-                    )
-                })}
-                </ul>
-                <ul className='carousel-dots' style={{display: this.state.showElem ? '' : 'none'}}>
                     {this.state.listImg.map((item, imgIndex) => {
                         return (
-                            <li className={imgIndex === this.state.index ? 'active' : ''} key={imgIndex} onClick={() => this.indexChange(imgIndex)}></li>
+                            <li className={imgIndex === this.state.index ? 'show' : ''} key={item}>
+                                <img src={item} alt='' onClick={() => this.onClick(imgIndex)}
+                                style={{ width: this.state.imgWidth, height: this.state.imgHeight }}
+                                 />
+                            </li>
                         )
                     })}
                 </ul>
-                <div className='carousel-control' style={{display: this.state.showElem ? '' : 'none'}}>
+                <ul className='carousel-dots' style={{ display: this.state.showElem ? '' : 'none' }}>
+                    {this.state.listImg.map((item, imgIndex) => {
+                        return (
+                            <li className={imgIndex === this.state.index ? 'active' : ''} key={item} onClick={() => this.indexChange(imgIndex)}></li>
+                        )
+                    })}
+                </ul>
+                <div className='carousel-control' style={{ display: this.state.showElem ? '' : 'none' }}>
                     <span className='left' onClick={(e) => this.previous(e)}>上一个</span>
                     <span className='right' onClick={(e) => this.next(e)}>下一个</span>
                 </div>
