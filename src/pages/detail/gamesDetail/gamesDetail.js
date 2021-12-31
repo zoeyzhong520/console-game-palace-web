@@ -1,27 +1,33 @@
 /*
 games游戏详情页
 */
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react/cjs/react.development'
-import { useDangerouslySetInnerHTML } from '../../common/common'
+import { useDangerouslySetInnerHTML, cgp_recommend_getDetail_with_objectId } from '../../common/common'
 import CGPBottomLine from '../../components/cgpBottomLine/cgpBottomLine'
 import './gamesDetail.css'
 
 const GamesDetail = () => {
+    const { objectId } = useParams()
     const location = useLocation()
 
     const [dataSource, setDataSource] = useState({})
 
-    useEffect(() => {
-        setDataSource(location.state)
+    useEffect(() => { 
+        // API
+        const apiRequest = () => {
+            cgp_recommend_getDetail_with_objectId(objectId, location.state && location.state.isBanner ? 'CGP_Banner' : 'CGP_HotRecommend').then(res => {
+                setDataSource(res)
+            })
+        }
+        apiRequest()
     }, [])
 
     const Nav = () => {
         return (
             <div className='nav'>
                 <img src={require('../../home/static/logo.png').default} alt='' />
-                <p>根据小助的精心统计分析，这款游戏已经一共被查看了888次了。</p>
-                <p>当然数据只能从一定程度体现热门程度，实际表现期待你的体验。</p>
+                <p>Hello！依托小助的{' "大数据" '}分析，这款游戏一共被查看了{dataSource.readCount ? dataSource.readCount : '888888'}次了。</p>
             </div>
         )
     }

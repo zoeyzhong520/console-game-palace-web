@@ -41,7 +41,7 @@ class Carousel extends React.Component {
             showElem
         }, () => {
             // 开启定时器
-            this.start()
+            // this.start()
         })
     }
 
@@ -58,7 +58,6 @@ class Carousel extends React.Component {
 
     // 开始
     start = () => {
-        console.log(this.state.listImg)
         // 当图片数量<=1时无需启动定时器
         if (this.state.listImg.length <= 1) {
             return
@@ -125,7 +124,7 @@ class Carousel extends React.Component {
                 <ul className='ul'>
                     {this.state.listImg.map((item, imgIndex) => {
                         return (
-                            <li className={imgIndex === this.state.index ? 'show' : ''} key={item}>
+                            <li className={imgIndex === this.state.index ? 'show' : ''} key={item+'img'}>
                                 <img src={item} alt='' onClick={() => this.onClick(imgIndex)}
                                 style={{ width: this.state.imgWidth, height: this.state.imgHeight }}
                                  />
@@ -136,7 +135,7 @@ class Carousel extends React.Component {
                 <ul className='carousel-dots' style={{ display: this.state.showElem ? '' : 'none' }}>
                     {this.state.listImg.map((item, imgIndex) => {
                         return (
-                            <li className={imgIndex === this.state.index ? 'active' : ''} key={item} onClick={() => this.indexChange(imgIndex)}></li>
+                            <li className={imgIndex === this.state.index ? 'active' : ''} key={item+'carousel-dots'} onClick={() => this.indexChange(imgIndex)}></li>
                         )
                     })}
                 </ul>

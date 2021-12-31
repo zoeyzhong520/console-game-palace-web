@@ -23,6 +23,7 @@
     /* 宽度撑满，高度自适应，避免图片拉伸变形 */
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .carousel-control .left {

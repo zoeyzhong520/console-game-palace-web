@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// 引入
+// 引入Bmob
 import Bmob from 'hydrogen-js-sdk'
-// 初始化
+
+// 初始化Bmob
 Bmob.initialize('df3cba52942cb8b9', 'kn03PK')
 // 调试模式
 Bmob.debug(true)
@@ -14,8 +15,8 @@ React.$bmob = Bmob
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+      <App />
+    </React.StrictMode>,
   document.getElementById('root')
 );
 

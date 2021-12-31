@@ -11,7 +11,8 @@ import { Component } from "react"
 class CGPNavLink extends Component {
     render() {
         return (
-            <NavLink target='_blank' {...this.props}></NavLink>
+            // <NavLink target='_blank' {...this.props}></NavLink>
+            <NavLink {...this.props}></NavLink>
         )
     }
 }

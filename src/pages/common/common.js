@@ -78,11 +78,22 @@ export const tabsList = [
         type: 'R'
     }]
 
+// type类型数组
+export const cgp_recommend_types = [
+    "ALL",
+    "A", "B", "C",
+    "D", "E", "F",
+    "G", "H", "I",
+    "J", "K", "L",
+    "M", "N", "O",
+    "P", "Q", "R"
+]
+
 /* dangerouslySetInnerHTML
-            1.dangerouslySetInnerHTMl 是React标签的一个属性，类似于angular的ng-bind；
-            2.有2个{{}}，第一{}代表jsx语法开始，第二个是代表dangerouslySetInnerHTML接收的是一个对象键值对;
-            3.既可以插入DOM，又可以插入字符串；
-        */
+    1.dangerouslySetInnerHTMl 是React标签的一个属性，类似于angular的ng-bind；
+    2.有2个{{}}，第一{}代表jsx语法开始，第二个是代表dangerouslySetInnerHTML接收的是一个对象键值对;
+    3.既可以插入DOM，又可以插入字符串；
+*/
 export const useDangerouslySetInnerHTML = (htmlText) => {
     return <div dangerouslySetInnerHTML={{ __html: htmlText }}></div>
 }
@@ -130,6 +141,47 @@ export const cgp_recommend_all_list = function (page) {
     })
 }
 
+// 热门文章列表数据
+export const cgp_popular_articles_list = function(page) {
+	return new Promise((resolve, reject) => {
+
+		const query = React.$bmob.Query('CGP_PopularArticles')
+		// 对createdAt字段降序排列
+		query.order("-createdAt")
+		query.limit(12)
+		query.skip(page*10)
+		query.find().then(res => {
+			// console.log(res)
+			resolve(res)
+		});
+
+	})
+}
+
+/**
+ * 根据 tabs 标签查询数据
+ * @param  {String} type     类型
+ * @return {Array}           查询的结果
+ */
+export const leaderboards_query_list = function (type, page) {
+    return new Promise((resolve, reject) => {
+
+        const query = React.$bmob.Query('CGP_HotRecommend')
+        if (type !== 'ALL') {
+            query.equalTo("type", "==", type)
+        }
+        // 对readCount字段降序排列
+        query.order("-readCount")
+        query.limit(20)
+        // query.skip(page * 10)
+        query.find().then(res => {
+            // console.log(res)
+            resolve(res)
+        });
+
+    })
+}
+
 /**
  * 根据 tabs 标签查询数据
  * @param  {String} index    tabs 对应的下标
@@ -156,16 +208,23 @@ export const cgp_recommend_query_list = function (index, page) {
     })
 }
 
-// type类型数组
-export const cgp_recommend_types = [
-    "ALL",
-    "A", "B", "C",
-    "D", "E", "F",
-    "G", "H", "I",
-    "J", "K", "L",
-    "M", "N", "O",
-    "P", "Q", "R"
-]
+/*
+获取一行记录
+objectId 主键ID
+tableName 数据表名，默认为 CGP_HotRecommend
+*/ 
+export const cgp_recommend_getDetail_with_objectId = function (objectId, tableName) {
+    return new Promise((resolve, reject) => {
+        const query = React.$bmob.Query(!!tableName ? tableName : 'CGP_HotRecommend')
+        query.get(objectId).then(res => {
+            // console.log(res)
+            resolve(res)
+        }).catch(err => {
+            // console.log(err)
+            reject(err)
+        })
+    })
+}
 
 // 新增一行记录 设备ID
 export const cgp_recommend_insert_deviceId = function () {

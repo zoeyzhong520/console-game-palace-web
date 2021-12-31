@@ -1,35 +1,50 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { tabsList, cgp_recommend_banner_list } from '../common/common'
+import { connect } from 'react-redux'
+import { tabsList, cgp_recommend_banner_list, leaderboards_query_list, cgp_popular_articles_list } from '../common/common'
 import Carousel from '../components/carousel/carousel'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import './home.css'
 
-const Home = () => {
+const Home = (props) => {
     const navigate = useNavigate()
-
-    const [dataSource, setDataSource] = useState({
-        gamesList: [1, 1, 1, 1, 1, 1, 1, 1], // 游戏推荐
-        articlesList: [1, 1, 1, 1, 1, 1, 1, 1], // 热门文章
-        bannerList: []
-    })
-    useEffect(() => {
-
-    }, [])
 
     // 广告位数据
     const [bannerList, setBannerList] = useState([])
     useEffect(() => {
         // API
         const apiRequest = () => {
-            // 获取广告位数据
             cgp_recommend_banner_list().then(res => {
                 setBannerList(res)
             })
         }
-        apiRequest()
+        // apiRequest()
+    }, [])
+
+    // 获取全部推荐数据
+    const [gamesList, setGamesList] = useState([])
+    useEffect(() => {
+        // API
+        const apiRequest = () => {
+            leaderboards_query_list().then(res => {
+                setGamesList(res)
+            })
+        }
+        // apiRequest()
+    }, [])
+
+    // 热门文章列表数据
+    const [articlesList, setArticlesList] = useState([])
+    useEffect(() => {
+        // API
+        const apiRequest = () => {
+            cgp_popular_articles_list().then(res => {
+                setArticlesList(res)
+            })
+        }
+        // apiRequest()
     }, [])
 
     const Nav = () => {
@@ -55,7 +70,7 @@ const Home = () => {
             return (
                 tabsList.map(item => {
                     return <ul>
-                        <li key={item}>
+                        <li key={item.type}>
                             <CGPNavLink to={{ pathname: '/games/' + item.type }}>{item.name}</CGPNavLink>
                         </li>
                     </ul>
@@ -84,12 +99,12 @@ const Home = () => {
                     {getSectionWithTitle({ title: '游戏推荐', showMore: true, name: 'games' })}
                     <div className='list'>
                         <ul>
-                            {dataSource.gamesList.map(item => {
-                                return <li key={item} className='game'>
-                                    <CGPNavLink to='/gamesDetail'>
-                                        <img src={require('./static/7.jpeg').default} alt="" />
-                                        <span className='title'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
-                                        <span className='description'>介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介</span>
+                            {gamesList.map(item => {
+                                return <li key={item.title} className='game'>
+                                    <CGPNavLink to={{ pathname: '/gamesDetail/' + item.objectId }}>
+                                        <img src={item.image} alt="" />
+                                        <span className='title'>{item.title}</span>
+                                        <span className='description'>{item.description}</span>
                                     </CGPNavLink>
                                 </li>
                             })}
@@ -106,11 +121,11 @@ const Home = () => {
                     {getSectionWithTitle({ title: '热门文章', showMore: true, name: 'articles' })}
                     <div className='list'>
                         <ul>
-                            {dataSource.articlesList.map(item => {
-                                return <li key={item} className='article'>
+                            {articlesList.map(item => {
+                                return <li key={item.title} className='article'>
                                     <CGPNavLink to='/articlesDetail'>
-                                        <img src={require('./static/7.jpeg').default} alt="" />
-                                        <span className='title'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+                                        <img src={item.image} alt="" />
+                                        <span className='title'>{item.title}</span>
                                     </CGPNavLink>
                                 </li>
                             })}
@@ -140,7 +155,7 @@ const Home = () => {
         // 广告位点击
         const clickCarousel = (imgIndex) => {
             // 点击广告位打开游戏详情
-            navigate('/gamesDetail', { state: bannerList[imgIndex], replace: false })
+            navigate('/gamesDetail/' + bannerList[imgIndex].objectId, { state: { isBanner: true } })
         }
 
         const getCarouselImgs = () => {
@@ -180,4 +195,16 @@ const Home = () => {
     )
 }
 
-export default Home
+const stateToProps = (state) => {
+    return {
+        bannerList: state.bannerList,
+        gamesList: state.gamesList,
+        articlesList: state.articlesList
+    }
+}
+
+const dispatchToProps = (dispatch) => {
+    
+}
+
+export default connect(stateToProps)(Home)
