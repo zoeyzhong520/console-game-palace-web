@@ -5,8 +5,6 @@ react-router-dom的使用：
 3 使用 Routes 组件包裹整个应用
 */
 import { BrowserRouter as Router, Switch, Route, Routes, NavLink } from 'react-router-dom';
-import store from './store/store'
-import { Provider } from 'react-redux';
 import Home from './pages/home/home'
 import Games from './pages/games/games'
 import Articles from './pages/articles/articles'
@@ -18,15 +16,11 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path='/' element={
-            <Provider store={store}>
-              <Home />
-            </Provider>
-          } />
+          <Route path='/' element={<Home />} />
           <Route path='/games/:type' element={<Games />} />
           <Route path='/articles' element={<Articles />} />
           <Route path='/gamesDetail/:objectId' element={<GamesDetail />} />
-          <Route path='/articlesDetail' element={<ArticlesDetail />} />
+          <Route path='/articlesDetail/:objectId' element={<ArticlesDetail />} />
         </Routes>
       </div>
     </Router>

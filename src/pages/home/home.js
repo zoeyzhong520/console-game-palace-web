@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { tabsList, cgp_recommend_banner_list, leaderboards_query_list, cgp_popular_articles_list } from '../common/common'
+import { tabsList, randomColor, cgp_recommend_banner_list, leaderboards_query_list, cgp_popular_articles_list, cgp_configs } from '../common/common'
+import * as actionTypes from '../../store/actionTypes'
 import Carousel from '../components/carousel/carousel'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
@@ -9,42 +10,91 @@ import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import './home.css'
 
 const Home = (props) => {
+    /*
+    1 从props里声明addList的方法
+    2 addList有一个参数action:{type: '', bannerList: []}
+    3 每次调用addList方法时只需要传递不同的参数即可实现reducer.js的数据更新
+    */
+    let { addList } = props
+
     const navigate = useNavigate()
+
+    // 获取配置信息
+    const [configs, setConfigs] = useState({})
+    useEffect(() => {
+        // API
+        const apiRequest = () => {
+            cgp_configs().then(res => {
+                setConfigs(res[0])
+            })
+        }
+        apiRequest()
+    }, [])
 
     // 广告位数据
     const [bannerList, setBannerList] = useState([])
     useEffect(() => {
+        // 判断reducer是否有缓存的数据
+        if (props.bannerList.length > 0) {
+            setBannerList(props.bannerList)
+            return
+        }
+
         // API
         const apiRequest = () => {
             cgp_recommend_banner_list().then(res => {
                 setBannerList(res)
+                addList({
+                    type: actionTypes.ADD_BANNERLIST,
+                    bannerList: res
+                })
             })
         }
-        // apiRequest()
+        apiRequest()
     }, [])
 
     // 获取全部推荐数据
     const [gamesList, setGamesList] = useState([])
     useEffect(() => {
+        // 判断reducer是否有缓存的数据
+        if (props.gamesList.length > 0) {
+            setGamesList(props.gamesList)
+            return
+        }
+
         // API
         const apiRequest = () => {
             leaderboards_query_list().then(res => {
                 setGamesList(res)
+                addList({
+                    type: actionTypes.ADD_GAMESLIST,
+                    gamesList: res
+                })
             })
         }
-        // apiRequest()
+        apiRequest()
     }, [])
 
     // 热门文章列表数据
     const [articlesList, setArticlesList] = useState([])
     useEffect(() => {
+        // 判断reducer是否有缓存的数据
+        if (props.articlesList.length > 0) {
+            setArticlesList(props.articlesList)
+            return
+        }
+
         // API
         const apiRequest = () => {
             cgp_popular_articles_list().then(res => {
                 setArticlesList(res)
+                addList({
+                    type: actionTypes.ADD_ARTIClESLIST,
+                    articlesList: res
+                })
             })
         }
-        // apiRequest()
+        apiRequest()
     }, [])
 
     const Nav = () => {
@@ -123,7 +173,7 @@ const Home = (props) => {
                         <ul>
                             {articlesList.map(item => {
                                 return <li key={item.title} className='article'>
-                                    <CGPNavLink to='/articlesDetail'>
+                                    <CGPNavLink to={{ pathname: '/articlesDetail/' + item.objectId }}>
                                         <img src={item.image} alt="" />
                                         <span className='title'>{item.title}</span>
                                     </CGPNavLink>
@@ -138,6 +188,26 @@ const Home = (props) => {
         // 其他列表（关于、加入。。。）
         // props: {title: '', type: 1, description: ''}, title是标题，type是类型（1是关于小助手，2是加入俱乐部）, description是详细描述
         const getOtherList = (props) => {
+            // 右侧内容
+            const getRight = () => {
+                let pArray = [
+                    '小助已经收藏了'+configs.articlesCount+'篇热文',
+                    '小助已经收录了'+configs.gamesCount+'款游戏',
+                    '小助已经拥有了'+configs.deviceIdsCount+'个注册设备',
+                    '小助已经招揽了'+configs.membersCount+'名俱乐部会员',
+                    '小助还在路上，路漫漫其修远兮，吾将上下而求索',
+                    '......'
+                ]
+
+                return (
+                    <div className='other-right'>
+                        {pArray.map(item => {
+                            return <p>{item}</p>
+                        })}
+                    </div>
+                )
+            }
+
             return (
                 <div className='aj'>
                     {getSectionWithTitle({ title: props.title, name: props.type === 1 ? 'about' : 'join' })}
@@ -145,8 +215,8 @@ const Home = (props) => {
                         <img src={require(props.type === 1 ? './static/mpCode.jpeg' : './static/wechat.jpeg').default} alt="" />
                         <span>{props.description}</span>
                     </div>
-                    <div className='pic'>
-                        <img src={require('./static/7.jpeg').default} alt="" />
+                    <div className='other'>
+                        {getRight()}
                     </div>
                 </div>
             )
@@ -170,7 +240,9 @@ const Home = (props) => {
             <div className='main w'>
                 <div className="hd">
                     <div className="screening">
-                        {getTabsList()}
+                        <div className='screening-cover'>
+                            {getTabsList()}
+                        </div>
                     </div>
                     <div className="carousel">
                         <Carousel listImg={getCarouselImgs()} imgWidth='895px' imgHeight='450px' onClick={(imgIndex) => clickCarousel(imgIndex)} />
@@ -204,7 +276,11 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = (dispatch) => {
-    
+    return {
+        addList(action) {
+            dispatch(action)
+        }
+    }
 }
 
-export default connect(stateToProps)(Home)
+export default connect(stateToProps, dispatchToProps)(Home)

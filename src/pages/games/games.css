@@ -59,8 +59,8 @@
 }
 
 .games .nav .tabs ul li a:hover {
-    color: #2979ff;
-    border-bottom: 2px solid #2979ff;
+    /* color: #2979ff; */
+    /* border-bottom: 2px solid #2979ff; */
 }
 
 .games .nav .nav-top {
@@ -136,6 +136,7 @@
     width: 100%;
     height: 100%;
     border-radius: 3px 0 0 3px;
+    object-fit: cover;
 }
 
 .games .main ul {
@@ -166,6 +167,7 @@
 }
 
 .games .main .content .gameName {
+    height: 44px;
     margin: 10px;
     font-weight: 700;
     /* 限制两行 */
@@ -174,6 +176,7 @@
 }
 
 .games .main .content .gameDesc {
+    height: 50px;
     margin: 0 10px 10px 10px;
     font-size: 12px;
     /* 限制三行 */

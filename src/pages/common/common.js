@@ -98,6 +98,25 @@ export const useDangerouslySetInnerHTML = (htmlText) => {
     return <div dangerouslySetInnerHTML={{ __html: htmlText }}></div>
 }
 
+/*
+取随机数
+min 最小值
+max 最大值
+*/ 
+export const randomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max-min))+min
+}
+
+/*
+取随机颜色
+*/  
+export const randomColor = () => {
+    var r = Math.floor( Math.random() * 256 );
+    var g = Math.floor( Math.random() * 256 );    
+    var b = Math.floor( Math.random() * 256 );
+    return "rgb("+r+','+g+','+b+")";
+}
+
 // 获取配置信息
 export const cgp_configs = function () {
     return new Promise((resolve, reject) => {
@@ -148,7 +167,7 @@ export const cgp_popular_articles_list = function(page) {
 		const query = React.$bmob.Query('CGP_PopularArticles')
 		// 对createdAt字段降序排列
 		query.order("-createdAt")
-		query.limit(12)
+		query.limit(20)
 		query.skip(page*10)
 		query.find().then(res => {
 			// console.log(res)
@@ -184,18 +203,18 @@ export const leaderboards_query_list = function (type, page) {
 
 /**
  * 根据 tabs 标签查询数据
- * @param  {String} index    tabs 对应的下标
+ * @param  {String} type    tabs类型
  * @return {Array}           查询的结果
  */
-export const cgp_recommend_query_list = function (index, page) {
+export const cgp_recommend_query_list = function (type, page) {
     return new Promise((resolve, reject) => {
 
-        if (cgp_recommend_types[index] === 'ALL') {
+        if (type === 'ALL') {
             return
         }
 
         const query = React.$bmob.Query('CGP_HotRecommend')
-        query.equalTo("type", "==", cgp_recommend_types[index])
+        query.equalTo("type", "==", type)
         // 对createdAt字段降序排列
         query.order("-createdAt")
         query.limit(10)

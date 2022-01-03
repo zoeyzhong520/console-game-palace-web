@@ -86,8 +86,14 @@ body {
     float: left;
     width: 305px;
     height: 450px;
-    background-color: rgba(0, 0, 0, .3);
+    background: url(../home/static/screeningBg.jpeg) no-repeat;
     border-radius: 3px 0 0 3px;
+}
+
+.home .main .hd .screening .screening-cover {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
 }
 
 .home .main .hd .screening ul {
@@ -241,13 +247,22 @@ body {
     margin: 20px;
 }
 
-.home .main .bd .aj .pic {
+.home .main .bd .aj .other {
     float: right;
     width: 895px;
     height: 437px;
+    border-radius: 3px;
+    background: url(../home/static/screeningBg.jpeg) no-repeat;
 }
 
-.home .main .bd .pic img {
+.home .main .bd .aj .other .other-right {
     width: 100%;
     height: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.home .main .bd .aj .other .other-right p {
+    color: #fff;
+    padding: 25px 0;
 }

@@ -39,9 +39,17 @@
 }
 
 .articlesDetail .main {
-    padding: 20px 0;
+    padding: 20px;
     margin-top: 20px;
-    /* 让子元素垂直居中 */
     text-align: center;
     background-color: #fff;
+}
+
+.articlesDetail .main p {
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.articlesDetail .main img {
+    
 }

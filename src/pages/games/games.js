@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { tabsList } from '../common/common'
+import { tabsList, cgp_recommend_all_list, cgp_recommend_query_list } from '../common/common'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
@@ -9,16 +9,44 @@ import './games.css'
 const Games = () => {
     // useParams接收路由参数
     const { type } = useParams()
-    
+
     const [dataSource, setDataSource] = useState({
-        rankList: [1, 1, 1, 1], // 游戏搜索排行
-        gamesList: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] // 游戏列表
+        rankList: [1, 1, 1, 1] // 游戏搜索排行
     })
 
     useEffect(() => {
-        console.log('useEffect')
-        alert(type)
+
     })
+
+    // 标签数组
+    const [tabsArray, setTabsArray] = useState([])
+    useEffect(() => {
+        let tabs = tabsList
+        tabs.map(item => {
+            // 设置默认选中的标签
+            item.isSelect = type === item.type
+        })
+        setTabsArray(tabs)
+    }, [])
+
+    // 获取全部推荐数据
+    const [gamesList, setGamesList] = useState([])
+    useEffect(() => {
+        apiRequest(type)
+    }, [])
+
+    // API
+    const apiRequest = (type) => {
+        if (type === 'All') {
+            cgp_recommend_all_list().then(res => {
+                setGamesList(res)
+            })
+        } else {
+            cgp_recommend_query_list(type).then(res => {
+                setGamesList(res)
+            })
+        }
+    }
 
     // 导航菜单
     const Nav = () => {
@@ -26,13 +54,29 @@ const Games = () => {
         const getTabsList = () => {
             return (
                 <div className='tabs'>
-                    {tabsList.map(item => {
+                    {tabsArray.map(item => {
                         return <ul>
-                            <li key={item}><a href='#'>{item.name}</a></li>
+                            <li onClick={() => tabsListClick(item.type)} key={item}>
+                                <a href='#'
+                                    style={{
+                                        color: item.isSelect ? '#2979ff' : '#333',
+                                        borderBottom: item.isSelect ? '2px solid #2979ff' : '0'
+                                    }}>{item.name}
+                                </a>
+                            </li>
                         </ul>
                     })}
                 </div>
             )
+        }
+
+        // tabs点击刷新数据
+        const tabsListClick = (type) => {
+            // 点击某个标签时，设置选中样式
+            tabsArray.map((item, index) => {
+                item.isSelect = type === item.type
+            })
+            apiRequest(type)
         }
 
         // 游戏搜索排行（取前20位）
@@ -70,16 +114,16 @@ const Games = () => {
     const Main = () => {
         return (
             <div className='main'>
-                {dataSource.gamesList.map(item => {
+                {gamesList.map(item => {
                     return <ul>
                         <li key={item}>
                             <div className='gamePic'>
-                                <img src={require('../home/static/7.jpeg').default} />
+                                <img src={item.image} alt='' />
                             </div>
                             <div className='content'>
-                                <p className='gameName'>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>
-                                <p className='gameDesc'>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
-                                <CGPNavLink to='/gamesDetail'>查看详情</CGPNavLink>
+                                <p className='gameName'>{item.title}</p>
+                                <p className='gameDesc'>{item.description}</p>
+                                <CGPNavLink to={{ pathname: '/gamesDetail/' + item.objectId }}>查看详情</CGPNavLink>
                             </div>
                         </li>
                     </ul>
