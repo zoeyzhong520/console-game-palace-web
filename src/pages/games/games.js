@@ -33,6 +33,24 @@ const Games = () => {
     const [gamesList, setGamesList] = useState([])
     useEffect(() => {
         apiRequest(type)
+
+        // 处理滚动
+        const handleOnScroll = () => {
+            // 滚动条距离顶部
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            // 可视区域
+            let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            // 滚动条内容的总高度
+            let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            if (scrollTop + clientHeight === scrollHeight) {
+                console.log("到底部了")
+                alert('到底部了')
+            }
+        }
+
+        window.onscroll = () => {
+            handleOnScroll()
+        }
     }, [])
 
     // API
