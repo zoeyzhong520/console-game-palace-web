@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { tabsList, cgp_recommend_all_list, cgp_recommend_query_list } from '../common/common'
+import { tabsList, handleOnScroll, cgp_recommend_all_list, cgp_recommend_query_list } from '../common/common'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
@@ -32,36 +32,44 @@ const Games = () => {
     // 获取全部推荐数据
     const [gamesList, setGamesList] = useState([])
     useEffect(() => {
-        apiRequest(type)
-
-        // 处理滚动
-        const handleOnScroll = () => {
-            // 滚动条距离顶部
-            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            // 可视区域
-            let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
-            // 滚动条内容的总高度
-            let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-            if (scrollTop + clientHeight === scrollHeight) {
-                console.log("到底部了")
-                alert('到底部了')
-            }
-        }
-
-        window.onscroll = () => {
-            handleOnScroll()
-        }
+        apiRequest(type, page)
     }, [])
 
+    // 页数page
+    const [page, setPage] = useState(0)
+    useEffect(() => {
+        window.onscroll = () => {
+            handleOnScroll().then(() => {
+                // 页码自增
+                let p = page + 1
+                setPage(p)
+                console.log(p)
+                // API
+                // apiRequest(type, p)
+            })
+        }
+    }, [page])
+
     // API
-    const apiRequest = (type) => {
+    const apiRequest = (type, page) => {
         if (type === 'All') {
-            cgp_recommend_all_list().then(res => {
-                setGamesList(res)
+            cgp_recommend_all_list(page).then(res => {
+                console.log(page)
+                if (page === 0) {
+                    setGamesList(res)
+                } else {
+                    let list = gamesList.concat(res)
+                    setGamesList(list)
+                }
             })
         } else {
-            cgp_recommend_query_list(type).then(res => {
-                setGamesList(res)
+            cgp_recommend_query_list(type, page).then(res => {
+                if (page === 0) {
+                    setGamesList(res)
+                } else {
+                    let list = gamesList.concat(res)
+                    setGamesList(list)
+                }
             })
         }
     }
@@ -94,7 +102,7 @@ const Games = () => {
             tabsArray.map((item, index) => {
                 item.isSelect = type === item.type
             })
-            apiRequest(type)
+            apiRequest(type, page)
         }
 
         // 游戏搜索排行（取前20位）
@@ -104,6 +112,9 @@ const Games = () => {
         const getSearchRankList = () => {
             return (
                 <div className='rank'>
+
+                    <p>{page}</p>
+
                     <span>热门搜索：</span>
                     {dataSource.rankList.map(item => {
                         return <ul>

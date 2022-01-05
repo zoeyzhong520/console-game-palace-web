@@ -102,20 +102,37 @@ export const useDangerouslySetInnerHTML = (htmlText) => {
 取随机数
 min 最小值
 max 最大值
-*/ 
+*/
 export const randomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max-min))+min
+    return Math.floor(Math.random() * (max - min)) + min
 }
 
 /*
 取随机颜色
-*/  
+*/
 export const randomColor = () => {
-    var r = Math.floor( Math.random() * 256 );
-    var g = Math.floor( Math.random() * 256 );    
-    var b = Math.floor( Math.random() * 256 );
-    return "rgb("+r+','+g+','+b+")";
+    var r = Math.floor(Math.random() * 256);
+    var g = Math.floor(Math.random() * 256);
+    var b = Math.floor(Math.random() * 256);
+    return "rgb(" + r + ',' + g + ',' + b + ")";
 }
+
+// 处理页面滚动
+export const handleOnScroll = () => {
+    return new Promise((resolve, reject) => {
+        // 滚动条距离顶部
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        // 可视区域
+        let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        // 滚动条内容的总高度
+        let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        if (scrollTop + clientHeight === scrollHeight) {
+            resolve(true)
+        }
+    })
+}
+
+/*以下为API*/
 
 // 获取配置信息
 export const cgp_configs = function () {
@@ -161,20 +178,20 @@ export const cgp_recommend_all_list = function (page) {
 }
 
 // 热门文章列表数据
-export const cgp_popular_articles_list = function(page) {
-	return new Promise((resolve, reject) => {
+export const cgp_popular_articles_list = function (page) {
+    return new Promise((resolve, reject) => {
 
-		const query = React.$bmob.Query('CGP_PopularArticles')
-		// 对createdAt字段降序排列
-		query.order("-createdAt")
-		query.limit(20)
-		query.skip(page*10)
-		query.find().then(res => {
-			// console.log(res)
-			resolve(res)
-		});
+        const query = React.$bmob.Query('CGP_PopularArticles')
+        // 对createdAt字段降序排列
+        query.order("-createdAt")
+        query.limit(20)
+        query.skip(page * 10)
+        query.find().then(res => {
+            // console.log(res)
+            resolve(res)
+        });
 
-	})
+    })
 }
 
 /**
@@ -231,7 +248,7 @@ export const cgp_recommend_query_list = function (type, page) {
 获取一行记录
 objectId 主键ID
 tableName 数据表名，默认为 CGP_HotRecommend
-*/ 
+*/
 export const cgp_recommend_getDetail_with_objectId = function (objectId, tableName) {
     return new Promise((resolve, reject) => {
         const query = React.$bmob.Query(!!tableName ? tableName : 'CGP_HotRecommend')
