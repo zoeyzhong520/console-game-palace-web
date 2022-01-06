@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { tabsList, cgp_recommend_all_list, cgp_recommend_query_list } from '../common/common'
+import * as actionTypes from '../../store/actionTypes'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
@@ -9,8 +10,17 @@ import CGPLoadMore from '../components/cgpLoadMore/cgpLoadMore'
 import './games.css'
 
 const Games = (props) => {
+    /*
+    1 从props里声明addList的方法
+    2 addList有一个参数action:{type: '', bannerList: []}
+    3 每次调用addList方法时只需要传递不同的参数即可实现reducer.js的数据更新
+    */
+    let { addGamesType } = props
+
     // useParams接收路由参数
     const { type } = useParams()
+
+    const navigate = useNavigate()
 
     // 加载状态
     const [loadStatus, setLoadStatus] = useState(null)
@@ -19,10 +29,10 @@ const Games = (props) => {
     const [page, setPage] = useState(0)
 
     // 游戏类型type
-    const [gameType, setGameType] = useState('All')
+    const [gameType, setGameType] = useState(type)
     useEffect(() => {
         // 初始值
-        setGameType(type)
+        setGameType(props.gamesType.length > 0 ? props.gamesType : type)
     }, [])
 
     // 游戏查看榜
@@ -85,11 +95,18 @@ const Games = (props) => {
                 tabsArray.map((item, index) => {
                     item.isSelect = type === item.type
                 })
-                
+
                 // 把page清零
                 setPage(0)
                 // 更新gameType
                 setGameType(type)
+                // 更新loadStatus
+                setLoadStatus('default')
+                // 更新reducer
+                addGamesType({
+                    type: actionTypes.ADD_GAMESTYPE,
+                    gamesType: type
+                })
                 // API
                 apiRequest(type, 0)
             }
@@ -117,12 +134,19 @@ const Games = (props) => {
         注意：文本取前10位，超过10位则显示...
         */
         const getSearchRankList = () => {
+            // 点击热门搜索
+            const searchRankListClick = (e) => {
+                navigate('/gamesDetail/' + e.objectId)
+            }
+
             return (
                 <div className='rank'>
                     <span>热门搜索：</span>
                     {rankList.slice(0, 4).map(item => {
                         return <ul>
-                            <li key={item.title}><a href='#'>{'∙'}{item.title.length >= 10 ? item.title.slice(0, 10)+'...' : item.title}</a></li>
+                            <li onClick={() => searchRankListClick(item)} key={item.title}>
+                                <p>{item.title}</p>
+                            </li>
                         </ul>
                     })}
                 </div>
@@ -187,8 +211,17 @@ const Games = (props) => {
 
 const stateToProps = (state) => {
     return {
-        gamesList: state.gamesList
+        gamesList: state.gamesList,
+        gamesType: state.gamesType
     }
 }
 
-export default connect(stateToProps)(Games)
+const dispatchToProps = (dispatch) => {
+    return {
+        addGamesType(action) {
+            dispatch(action)
+        }
+    }
+}
+
+export default connect(stateToProps, dispatchToProps)(Games)

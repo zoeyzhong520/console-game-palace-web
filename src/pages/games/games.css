@@ -92,23 +92,21 @@
     margin-left: 25px;
 }
 
-.games .nav .nav-bottom .rank ul {
-    list-style: none;    
+.games .nav .nav-bottom .rank ul li p {
+    width: 200px;
+    font-size: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .games .nav .nav-bottom .rank ul li {
     float: left;
-    margin-left: 10px;
+    margin: 3px 40px;
+    cursor: pointer;
 }
 
-.games .nav .nav-bottom .rank ul li a {
-    font-size: 10px;
-    color: #333;
-    line-height: 50px;
-    text-decoration: none;
-}
-
-.games .nav .nav-bottom .rank ul li a:hover {
+.games .nav .nav-bottom .rank ul li:hover {
     color: #2979ff;
 }
 
