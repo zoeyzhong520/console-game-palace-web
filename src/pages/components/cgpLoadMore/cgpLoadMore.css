@@ -1,0 +1,13 @@
+.cgpLoadMore {
+    display: flex;
+    justify-content: center;
+    width: 1200px;
+}
+
+.cgpLoadMore button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    color: #999;
+    background-color: transparent;
+}

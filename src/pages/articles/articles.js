@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { randomNumber, cgp_popular_articles_list } from '../common/common'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
+import CGPLoadMore from '../components/cgpLoadMore/cgpLoadMore'
 import './articles.css'
 
 const Articles = () => {
@@ -11,13 +12,30 @@ const Articles = () => {
     const [articlesList, setArticlesList] = useState([])
     useEffect(() => {
         // API
-        const apiRequest = () => {
-            cgp_popular_articles_list().then(res => {
-                setArticlesList(res)
-            })
-        }
         apiRequest()
     }, [])
+
+    // 页数page
+    const [page, setPage] = useState(0)
+    useEffect(() => {
+        
+    }, [])
+
+    // 加载状态
+    const [loadStatus, setLoadStatus] = useState(null)
+
+    // API
+    const apiRequest = (page) => {
+        cgp_popular_articles_list(page, 9).then(res => {
+            if (page === 0) {
+                setArticlesList(res)
+            } else {
+                let list = articlesList.concat(res)
+                setArticlesList(list)
+                setLoadStatus(res.length === 0 ? 'noMore' : null)
+            }
+        })
+    }
 
     // Nav
     const Nav = () => {
@@ -66,10 +84,23 @@ const Articles = () => {
         )
     }
 
+    // 加载更多内容
+    const loadMore = () => {
+        // 页码自增
+        let p = page + 1
+        setPage(p)
+        // API
+        setTimeout(() => {
+            setLoadStatus('loading')
+            apiRequest(p)
+        }, 50);
+    }
+
     return (
         <div className='articles w'>
             <Nav />
             <Main />
+            <CGPLoadMore onClick={loadMore} loadStatus={loadStatus} />
             <CGPBottomLine />
         </div>
     )

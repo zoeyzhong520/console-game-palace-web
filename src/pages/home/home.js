@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { tabsList, randomColor, cgp_recommend_banner_list, leaderboards_query_list, cgp_popular_articles_list, cgp_configs } from '../common/common'
+import { tabsList, cgp_recommend_banner_list, leaderboards_query_list, cgp_popular_articles_list, cgp_configs } from '../common/common'
 import * as actionTypes from '../../store/actionTypes'
 import Carousel from '../components/carousel/carousel'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'

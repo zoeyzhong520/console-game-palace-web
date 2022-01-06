@@ -177,15 +177,19 @@ export const cgp_recommend_all_list = function (page) {
     })
 }
 
-// 热门文章列表数据
-export const cgp_popular_articles_list = function (page) {
+/*
+热门文章列表数据
+page 页码
+limit 每页的内容个数
+*/ 
+export const cgp_popular_articles_list = function (page, limit) {
     return new Promise((resolve, reject) => {
 
         const query = React.$bmob.Query('CGP_PopularArticles')
         // 对createdAt字段降序排列
         query.order("-createdAt")
-        query.limit(20)
-        query.skip(page * 10)
+        query.limit(limit ? limit : 20)
+        query.skip(limit ? page * limit : page * 10)
         query.find().then(res => {
             // console.log(res)
             resolve(res)
