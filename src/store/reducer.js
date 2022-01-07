@@ -3,11 +3,13 @@ import * as actionTypes from './actionTypes'
 const defaultState = {
     bannerList: [],     // 广告位数据
     gamesList: [],      // 全部推荐数据
-    articlesList: [],    // 热门文章数据
+    articlesList: [],   // 热门文章数据
+    allGames: [],       // 全部游戏
     gamesType: ''       // 游戏类型
 }
 
 const reducer = (state = defaultState, action) => {
+    console.log(action)
     switch (action.type) {
         case actionTypes.ADD_BANNERLIST:
             return {
@@ -28,6 +30,11 @@ const reducer = (state = defaultState, action) => {
             return {
                 ...state,
                 gamesType: action.gamesType
+            }
+        case actionTypes.ADD_ALLGAMES:
+            return {
+                ...state,
+                allGames: action.allGames
             }
         default:
             if (false) {

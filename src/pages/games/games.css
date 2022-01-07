@@ -53,14 +53,10 @@
     border-left: 1px solid #ccc;
 }
 
-.games .nav .tabs ul li a {
+.games .nav .tabs ul li span {
     color: #333;
     text-decoration: none;
-}
-
-.games .nav .tabs ul li a:hover {
-    /* color: #2979ff; */
-    /* border-bottom: 2px solid #2979ff; */
+    cursor: pointer;
 }
 
 .games .nav .nav-top {

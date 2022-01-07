@@ -41,7 +41,7 @@ class Carousel extends React.Component {
             showElem
         }, () => {
             // 开启定时器
-            this.start()
+            // this.start()
         })
     }
 

@@ -10,29 +10,34 @@ import CGPLoadMore from '../components/cgpLoadMore/cgpLoadMore'
 import './games.css'
 
 const Games = (props) => {
-    /*
-    1 从props里声明addList的方法
-    2 addList有一个参数action:{type: '', bannerList: []}
-    3 每次调用addList方法时只需要传递不同的参数即可实现reducer.js的数据更新
-    */
+    // 使用reducer
     let { addGamesType } = props
 
-    // useParams接收路由参数
+    // useParams接收路由参数, NavLink跳转页面
     const { type } = useParams()
 
     const navigate = useNavigate()
 
     // 加载状态
-    const [loadStatus, setLoadStatus] = useState(null)
+    const [loadstatus, setloadstatus] = useState(null)
 
     // 页数page
     const [page, setPage] = useState(0)
 
     // 游戏类型type
-    const [gameType, setGameType] = useState(type)
+    const [gamesType, setGamesType] = useState(props.gamesType.length > 0 ? props.gamesType : type)
     useEffect(() => {
         // 初始值
-        setGameType(props.gamesType.length > 0 ? props.gamesType : type)
+        if (props.gamesType.length > 0) {
+            setGamesType(props.gamesType)
+            return
+        }
+
+        setGamesType(type)
+        addGamesType({
+            type: actionTypes.ADD_GAMESTYPE,
+            gamesType: type
+        })
     }, [])
 
     // 游戏查看榜
@@ -49,7 +54,7 @@ const Games = (props) => {
         let tabs = tabsList
         tabs.map(item => {
             // 设置默认选中的标签
-            item.isSelect = gameType === item.type
+            item.isSelect = gamesType === item.type
         })
         setTabsArray(tabs)
     }, [])
@@ -57,7 +62,7 @@ const Games = (props) => {
     // 获取全部推荐数据
     const [gamesList, setGamesList] = useState([])
     useEffect(() => {
-        apiRequest(gameType)
+        apiRequest(gamesType)
     }, [])
 
     // API
@@ -70,7 +75,7 @@ const Games = (props) => {
                     let list = gamesList.concat(res)
                     setGamesList(list)
                 }
-                setLoadStatus(res.length === 0 ? 'noMore' : null)
+                setloadstatus(res.length === 0 ? 'noMore' : null)
             })
         } else {
             cgp_recommend_query_list(type, page).then(res => {
@@ -79,7 +84,7 @@ const Games = (props) => {
                 } else {
                     let list = gamesList.concat(res)
                     setGamesList(list)
-                    setLoadStatus(res.length === 0 ? 'noMore' : null)
+                    setloadstatus(res.length === 0 ? 'noMore' : null)
                 }
             })
         }
@@ -99,9 +104,9 @@ const Games = (props) => {
                 // 把page清零
                 setPage(0)
                 // 更新gameType
-                setGameType(type)
-                // 更新loadStatus
-                setLoadStatus('default')
+                setGamesType(type)
+                // 更新loadstatus
+                setloadstatus('default')
                 // 更新reducer
                 addGamesType({
                     type: actionTypes.ADD_GAMESTYPE,
@@ -116,12 +121,12 @@ const Games = (props) => {
                     {tabsArray.map(item => {
                         return <ul>
                             <li onClick={() => tabsListClick(item.type)} key={item.name}>
-                                <a href='#'
+                                <span
                                     style={{
                                         color: item.isSelect ? '#2979ff' : '#333',
                                         borderBottom: item.isSelect ? '2px solid #2979ff' : '0'
                                     }}>{item.name}
-                                </a>
+                                </span>
                             </li>
                         </ul>
                     })}
@@ -196,15 +201,15 @@ const Games = (props) => {
         setPage(p)
         // API
         setTimeout(() => {
-            setLoadStatus('loading')
-            apiRequest(gameType, p)
+            setloadstatus('loading')
+            apiRequest(gamesType, p)
         }, 50);
     }
 
     return <div className='games w'>
         <Nav />
         <Main />
-        <CGPLoadMore onClick={loadMore} loadStatus={loadStatus} />
+        <CGPLoadMore onClick={loadMore} loadstatus={loadstatus} />
         <CGPBottomLine />
     </div>
 }

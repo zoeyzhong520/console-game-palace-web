@@ -78,17 +78,6 @@ export const tabsList = [
         type: 'R'
     }]
 
-// type类型数组
-export const cgp_recommend_types = [
-    "ALL",
-    "A", "B", "C",
-    "D", "E", "F",
-    "G", "H", "I",
-    "J", "K", "L",
-    "M", "N", "O",
-    "P", "Q", "R"
-]
-
 /* dangerouslySetInnerHTML
     1.dangerouslySetInnerHTMl 是React标签的一个属性，类似于angular的ng-bind；
     2.有2个{{}}，第一{}代表jsx语法开始，第二个是代表dangerouslySetInnerHTML接收的是一个对象键值对;
@@ -130,6 +119,23 @@ export const handleOnScroll = () => {
             resolve(true)
         }
     })
+}
+
+/**
+ * 使用test方法实现模糊查询
+ * @param  {Array}  list     原数组
+ * @param  {String} keyWord  查询的关键词
+ * @return {Array}           查询的结果
+ */
+ export const fuzzyQuery = function(list, keyWord) {
+	var reg = new RegExp(keyWord);
+	var arr = [];
+	for (var i = 0; i < list.length; i++) {
+		if (reg.test(list[i].title)) {
+			arr.push(list[i]);
+		}
+	}
+	return arr;
 }
 
 /*以下为API*/
@@ -329,4 +335,19 @@ export const recommend_detail_editRecord_with_objectId = function (objectId) {
         })
 
     })
+}
+
+// 获取全部数据
+// page 请求的分页页码
+export const recommend_search_all_data = function(page) {
+	return new Promise((resolve, reject) => {
+		
+		const query = React.$bmob.Query('CGP_HotRecommend')
+		query.limit(100)
+		query.skip(page * 100)
+		query.find().then(res => {
+			resolve(res)
+		});
+		
+	})
 }

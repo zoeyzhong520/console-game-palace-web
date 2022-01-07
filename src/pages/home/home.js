@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { tabsList, cgp_recommend_banner_list, leaderboards_query_list, cgp_popular_articles_list, cgp_configs } from '../common/common'
+import { tabsList, cgp_recommend_banner_list, leaderboards_query_list, cgp_popular_articles_list, recommend_search_all_data, fuzzyQuery, cgp_configs } from '../common/common'
 import * as actionTypes from '../../store/actionTypes'
 import Carousel from '../components/carousel/carousel'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
@@ -97,7 +97,55 @@ const Home = (props) => {
         apiRequest()
     }, [])
 
+    // 全部游戏数据
+    const [allGames, setAllGames] = useState([])
+    useEffect(() => {
+        console.log('全部游戏数据')
+        // 判断reducer是否有缓存的数据
+        if (props.allGames.length > 0) {
+            setGamesList(props.allGames)
+            return
+        }
+
+        // 根据当前游戏总数目计算出需要分页多少
+        let maxCount = Math.ceil(configs.gamesCount / 100)
+        console.log(maxCount, configs)
+        // API
+        let list = []
+        for (let i=0; i<maxCount; i++) {
+            recommend_search_all_data(i).then(res => {
+                let array = list.concat(res)
+                console.log(i, JSON.stringify(list))
+                if (list.length === 10) {
+                    console.log('加载完了！')
+                }
+                // // 更新allGames
+                // setAllGames(arr)
+                // // 使用reducer缓存数据
+                // addList({
+                //     type: actionTypes.ADD_ALLGAMES,
+                //     allGames: arr
+                // })
+            })
+        }
+    }, [])
+
+    // 筛选后的游戏数据
+    const [filterGames, setFilterGames] = useState([])
+
     const Nav = () => {
+        // 搜索API
+        const startSearch = (e) => {
+            console.log(e)
+            if (e.length === 0) {
+                setFilterGames([])
+                return
+            }
+            // 模糊匹配
+            let fuzzyArr = fuzzyQuery(allGames, e)
+            setFilterGames(fuzzyArr)
+        }
+
         return (
             <div className='nav w'>
                 <img src={require('./static/logo.png').default} alt=''></img>
@@ -109,7 +157,7 @@ const Home = (props) => {
                         <li><a href='#join'>加入俱乐部</a></li>
                     </ul>
                 </div>
-                <CGPSearchBar className='search' />
+                <CGPSearchBar className='search' searchClick={(e) => startSearch(e)} />
             </div>
         )
     }
@@ -271,7 +319,8 @@ const stateToProps = (state) => {
     return {
         bannerList: state.bannerList,
         gamesList: state.gamesList,
-        articlesList: state.articlesList
+        articlesList: state.articlesList,
+        allGames: state.allGames
     }
 }
 
