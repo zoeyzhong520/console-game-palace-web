@@ -100,7 +100,6 @@ const Home = (props) => {
     // 全部游戏数据
     const [allGames, setAllGames] = useState([])
     useEffect(() => {
-        console.log('全部游戏数据')
         // 判断reducer是否有缓存的数据
         if (props.allGames.length > 0) {
             setGamesList(props.allGames)
@@ -109,23 +108,26 @@ const Home = (props) => {
 
         // 根据当前游戏总数目计算出需要分页多少
         let maxCount = Math.ceil(configs.gamesCount / 100)
-        console.log(maxCount, configs)
+        // 先不执行以下函数，创建完搜索页后再挪过去
+        return
+
         // API
-        let list = []
-        for (let i=0; i<maxCount; i++) {
+        var tmpAllGames = []
+        for (let i = 0; i < maxCount; i++) {
             recommend_search_all_data(i).then(res => {
-                let array = list.concat(res)
-                console.log(i, JSON.stringify(list))
-                if (list.length === 10) {
-                    console.log('加载完了！')
+                res.map(item => {
+                    tmpAllGames.push(item)
+                })
+                
+                if (Math.ceil(tmpAllGames.length / 100) === maxCount) {
+                    // 更新allGames
+                    setAllGames(tmpAllGames)
+                    // 使用reducer缓存数据
+                    addList({
+                        type: actionTypes.ADD_ALLGAMES,
+                        allGames: tmpAllGames
+                    })
                 }
-                // // 更新allGames
-                // setAllGames(arr)
-                // // 使用reducer缓存数据
-                // addList({
-                //     type: actionTypes.ADD_ALLGAMES,
-                //     allGames: arr
-                // })
             })
         }
     }, [])
@@ -239,10 +241,10 @@ const Home = (props) => {
             // 右侧内容
             const getRight = () => {
                 let pArray = [
-                    '小助已经收藏了'+configs.articlesCount+'篇热文',
-                    '小助已经收录了'+configs.gamesCount+'款游戏',
-                    '小助已经拥有了'+configs.deviceIdsCount+'个注册设备',
-                    '小助已经招揽了'+configs.membersCount+'名俱乐部会员',
+                    '小助已经收藏了' + configs.articlesCount + '篇热文',
+                    '小助已经收录了' + configs.gamesCount + '款游戏',
+                    '小助已经拥有了' + configs.deviceIdsCount + '个注册设备',
+                    '小助已经招揽了' + configs.membersCount + '名俱乐部会员',
                     '小助还在路上，路漫漫其修远兮，吾将上下而求索',
                     '......'
                 ]
