@@ -97,55 +97,16 @@ const Home = (props) => {
         apiRequest()
     }, [])
 
-    // 全部游戏数据
-    const [allGames, setAllGames] = useState([])
-    useEffect(() => {
-        // 判断reducer是否有缓存的数据
-        if (props.allGames.length > 0) {
-            setGamesList(props.allGames)
-            return
-        }
-
-        // 根据当前游戏总数目计算出需要分页多少
-        let maxCount = Math.ceil(configs.gamesCount / 100)
-        // 先不执行以下函数，创建完搜索页后再挪过去
-        return
-
-        // API
-        var tmpAllGames = []
-        for (let i = 0; i < maxCount; i++) {
-            recommend_search_all_data(i).then(res => {
-                res.map(item => {
-                    tmpAllGames.push(item)
-                })
-                
-                if (Math.ceil(tmpAllGames.length / 100) === maxCount) {
-                    // 更新allGames
-                    setAllGames(tmpAllGames)
-                    // 使用reducer缓存数据
-                    addList({
-                        type: actionTypes.ADD_ALLGAMES,
-                        allGames: tmpAllGames
-                    })
-                }
-            })
-        }
-    }, [])
-
-    // 筛选后的游戏数据
-    const [filterGames, setFilterGames] = useState([])
-
     const Nav = () => {
         // 搜索API
         const startSearch = (e) => {
             console.log(e)
             if (e.length === 0) {
-                setFilterGames([])
                 return
             }
-            // 模糊匹配
-            let fuzzyArr = fuzzyQuery(allGames, e)
-            setFilterGames(fuzzyArr)
+
+            // 跳转到游戏搜索页
+            navigate('/gamesSearch/' + configs.gamesCount, { state: { keywords: e } })
         }
 
         return (
@@ -321,8 +282,7 @@ const stateToProps = (state) => {
     return {
         bannerList: state.bannerList,
         gamesList: state.gamesList,
-        articlesList: state.articlesList,
-        allGames: state.allGames
+        articlesList: state.articlesList
     }
 }
 

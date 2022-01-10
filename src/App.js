@@ -10,6 +10,7 @@ import Games from './pages/games/games'
 import Articles from './pages/articles/articles'
 import GamesDetail from './pages/detail/gamesDetail/gamesDetail'
 import ArticlesDetail from './pages/detail/articlesDetail/articlesDetail'
+import GamesSearch from './pages/search/gamesSearch'
 
 function App() {
   return (
@@ -21,10 +22,17 @@ function App() {
           <Route path='/articles' element={<Articles />} />
           <Route path='/gamesDetail/:objectId' element={<GamesDetail />} />
           <Route path='/articlesDetail/:objectId' element={<ArticlesDetail />} />
+          <Route path='/gamesSearch/:gamesCount' element={<GamesSearch />} />
         </Routes>
       </div>
     </Router>
   );
+}
+
+const stateToProps = (state) => {
+  return {
+      allGames: state.allGames
+  }
 }
 
 export default App;
