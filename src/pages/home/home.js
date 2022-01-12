@@ -100,7 +100,6 @@ const Home = (props) => {
     const Nav = () => {
         // 搜索API
         const startSearch = (e) => {
-            console.log(e)
             if (e.length === 0) {
                 return
             }

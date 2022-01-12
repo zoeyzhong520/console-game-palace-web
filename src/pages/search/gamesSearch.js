@@ -1,17 +1,20 @@
 /*
 游戏搜索页面
 */
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { fuzzyQuery, recommend_search_all_data } from '../common/common'
 import * as actionTypes from '../../store/actionTypes'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
+import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
+import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import './gamesSearch.css'
 
 const GamesSearch = (props) => {
     const { gamesCount } = useParams()
     const location = useLocation()
+    const navigate = useNavigate()
 
     // 使用reducer
     let { addList } = props
@@ -54,21 +57,63 @@ const GamesSearch = (props) => {
     // 筛选后的游戏数据
     const [filterGames, setFilterGames] = useState([])
     useEffect(() => {
-        // 模糊匹配
-        const fuzzy = () => {
-            if (allGames.length > 0) {
-                let fuzzyArr = fuzzyQuery(allGames, location.state.keywords)
-                setFilterGames(fuzzyArr)
-            }
-        }
-
-        fuzzy()
+        fuzzy(location.state.keywords)
     }, [allGames])
+
+    // 模糊匹配
+    const fuzzy = (keywords) => {
+        if (allGames.length > 0) {
+            let fuzzyArr = fuzzyQuery(allGames, keywords)
+            setFilterGames(fuzzyArr)
+        }
+    }
+
+    // 游戏查看榜
+    const [rankList, setRankList] = useState([])
+    useEffect(() => {
+        if (props.gamesList.length > 0) {
+            setRankList(props.gamesList)
+        }
+    }, [])
 
     // 导航区域
     const Nav = () => {
+        const TopSearch = () => {
+            // 点击热门搜索
+            const searchRankListClick = (e) => {
+                navigate('/gamesDetail/' + e.objectId)
+            }
+
+            return (
+                <div className='rank'>
+                    {/* <span>热门搜索：</span> */}
+                    {rankList.slice(0, 4).map(item => {
+                        return <ul>
+                            <li onClick={() => searchRankListClick(item)} key={item.title}>
+                                <p>{item.title}</p>
+                            </li>
+                        </ul>
+                    })}
+                </div>
+            )
+        }
+        
+        // 搜索API
+        const startSearch = (e) => {
+            if (e.length === 0) {
+                return
+            }
+
+            // 模糊匹配
+            fuzzy(e)
+        }
+
         return (
-            <div className='nav'></div>
+            <div className='nav'>
+                <img src={require('../home/static/logo.png').default} alt='' />
+                <TopSearch />
+                <CGPSearchBar searchClick={(e) => startSearch(e)} />
+            </div>
         )
     }
 
@@ -85,7 +130,7 @@ const GamesSearch = (props) => {
                             <div className='content'>
                                 <p className='gameName'>{item.title}</p>
                                 <p className='gameDesc'>{item.description}</p>
-                                <a href='#'>查看详情</a>
+                                <CGPNavLink to={{ pathname: '/gamesDetail/' + item.objectId }}>查看详情</CGPNavLink>
                             </div>
                         </li>
                     </ul>
@@ -105,7 +150,8 @@ const GamesSearch = (props) => {
 
 const stateToProps = (state) => {
     return {
-        allGames: state.allGames
+        allGames: state.allGames,
+        gamesList: state.gamesList
     }
 }
 
