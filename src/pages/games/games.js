@@ -158,6 +158,16 @@ const Games = (props) => {
             )
         }
 
+        // 搜索API
+        const startSearch = (e) => {
+            if (e.length === 0) {
+                return
+            }
+
+            // 跳转到游戏搜索页
+            navigate('/gamesSearch/' + props.configs.gamesCount, { state: { keywords: e } })
+        }
+
         return (
             <div className='nav'>
                 <div className='nav-top'>
@@ -166,7 +176,7 @@ const Games = (props) => {
                 </div>
                 <div className='nav-bottom'>
                     {getSearchRankList()}
-                    <CGPSearchBar className='search' />
+                    <CGPSearchBar className='search' searchClick={(e) => startSearch(e)} />
                 </div>
             </div>
         )
@@ -217,7 +227,8 @@ const Games = (props) => {
 const stateToProps = (state) => {
     return {
         gamesList: state.gamesList,
-        gamesType: state.gamesType
+        gamesType: state.gamesType,
+        configs: state.configs
     }
 }
 

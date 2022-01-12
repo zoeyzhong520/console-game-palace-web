@@ -5,7 +5,8 @@ const defaultState = {
     gamesList: [],      // 全部推荐数据
     articlesList: [],   // 热门文章数据
     allGames: [],       // 全部游戏
-    gamesType: ''       // 游戏类型
+    gamesType: '',      // 游戏类型
+    configs: {}         // 配置数据
 }
 
 const reducer = (state = defaultState, action) => {
@@ -35,6 +36,11 @@ const reducer = (state = defaultState, action) => {
             return {
                 ...state,
                 allGames: action.allGames
+            }
+        case actionTypes.ADD_CONFIGS:
+            return {
+                ...state,
+                configs: action.configs
             }
         default:
             if (false) {

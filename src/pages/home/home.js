@@ -22,10 +22,20 @@ const Home = (props) => {
     // 获取配置信息
     const [configs, setConfigs] = useState({})
     useEffect(() => {
+        // 判断reducer是否有缓存的数据
+        if (JSON.stringify(props.configs) !== '{}') {
+            setConfigs(props.configs)
+            return
+        }
+
         // API
         const apiRequest = () => {
             cgp_configs().then(res => {
                 setConfigs(res[0])
+                addList({
+                    type: actionTypes.ADD_CONFIGS,
+                    configs: res[0]
+                })
             })
         }
         apiRequest()
@@ -281,7 +291,8 @@ const stateToProps = (state) => {
     return {
         bannerList: state.bannerList,
         gamesList: state.gamesList,
-        articlesList: state.articlesList
+        articlesList: state.articlesList,
+        configs: state.configs
     }
 }
 
