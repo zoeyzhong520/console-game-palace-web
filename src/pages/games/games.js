@@ -25,10 +25,10 @@ const Games = (props) => {
     const [page, setPage] = useState(0)
 
     // 游戏类型type
-    const [gamesType, setGamesType] = useState(props.gamesType.length > 0 ? props.gamesType : type)
+    const [gamesType, setGamesType] = useState(props.gamesType.length > 0 && props.gamesType === type ? props.gamesType : type)
     useEffect(() => {
         // 初始值
-        if (props.gamesType.length > 0) {
+        if (props.gamesType.length > 0 && props.gamesType === type) {
             setGamesType(props.gamesType)
             return
         }
@@ -168,10 +168,14 @@ const Games = (props) => {
             navigate('/gamesSearch/' + props.configs.gamesCount, { state: { keywords: e } })
         }
 
+        const backRoot = () => {
+            navigate('/')
+        }
+
         return (
             <div className='nav'>
                 <div className='nav-top'>
-                    <img src={require('../home/static/logo.png').default} alt='' />
+                    <img src={require('../home/static/logo.png').default} alt='' onClick={() => backRoot()} />
                     {getTabsList()}
                 </div>
                 <div className='nav-bottom'>

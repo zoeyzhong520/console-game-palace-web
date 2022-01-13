@@ -10,7 +10,7 @@ import Games from './pages/games/games'
 import Articles from './pages/articles/articles'
 import GamesDetail from './pages/detail/gamesDetail/gamesDetail'
 import ArticlesDetail from './pages/detail/articlesDetail/articlesDetail'
-import GamesSearch from './pages/search/gamesSearch'
+import GamesSearch from './pages/search/gamesSearch'  
 
 function App() {
   return (
@@ -27,12 +27,6 @@ function App() {
       </div>
     </Router>
   );
-}
-
-const stateToProps = (state) => {
-  return {
-      allGames: state.allGames
-  }
 }
 
 export default App;

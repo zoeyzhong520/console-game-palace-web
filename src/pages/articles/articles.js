@@ -43,13 +43,16 @@ const Articles = () => {
         const readArticleRandom = () => {
             // 先从articlesList的长度范围内取一个随机数
             let randomNum = randomNumber(0, articlesList.length)
-            console.log(JSON.stringify(articlesList[randomNum]))
             navigate('/articlesDetail/' + articlesList[randomNum].objectId)
+        }
+
+        const backRoot = () => {
+            navigate('/')
         }
 
         return (
             <div className='nav'>
-                <img className='logo' src={require('../home/static/logo.png').default} alt='' />
+                <img className='logo' src={require('../home/static/logo.png').default} alt='' onClick={() => backRoot()} />
                 <div className='random'>
                     <p><a href='#' onClick={() => readArticleRandom()}>想要随机看篇文章？{<br />}试着点击一下这里。</a></p>
                 </div>

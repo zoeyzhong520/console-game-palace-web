@@ -24,6 +24,7 @@
     position: absolute;
     width: 100px;
     height: 100px;
+    cursor: pointer;
 }
 
 .articlesDetail .nav .title {

@@ -26,6 +26,7 @@
     float: left;
     width: 100px;
     height: 100%;
+    cursor: pointer;
 }
 
 .articles .nav .random {

@@ -1,7 +1,7 @@
 /*
 articles文章详情页
 */
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react/cjs/react.development'
 import { useDangerouslySetInnerHTML, cgp_recommend_getDetail_with_objectId } from '../../common/common'
 import CGPBottomLine from '../../components/cgpBottomLine/cgpBottomLine'
@@ -10,6 +10,7 @@ import './articlesDetail.css'
 const ArticlesDetail = () => {
     const { objectId } = useParams()
     const location = useLocation()
+    const navigate = useNavigate()
 
     const [dataSource, setDataSource] = useState({})
 
@@ -24,9 +25,13 @@ const ArticlesDetail = () => {
     }, [])
 
     const Nav = () => {
+        const backRoot = () => {
+            navigate('/')
+        }
+
         return (
             <div className="nav">
-                <img src={require('../../home/static/logo.png').default} alt='' />
+                <img src={require('../../home/static/logo.png').default} alt='' onClick={() => backRoot()} />
                 <p className='title'>{dataSource.title}</p>
                 <p>{dataSource.createdAt}</p>
             </div>

@@ -7,6 +7,7 @@ import Carousel from '../components/carousel/carousel'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
+import CGPLoading from '../components/CGPLoading/cgpLoading'
 import './home.css'
 
 const Home = (props) => {
@@ -16,8 +17,10 @@ const Home = (props) => {
     3 每次调用addList方法时只需要传递不同的参数即可实现reducer.js的数据更新
     */
     let { addList } = props
-
     const navigate = useNavigate()
+
+    // 是否加载完成
+    const [isLoad, setIsLoad] = useState(false)
 
     // 获取配置信息
     const [configs, setConfigs] = useState({})
@@ -75,6 +78,8 @@ const Home = (props) => {
         // API
         const apiRequest = () => {
             leaderboards_query_list().then(res => {
+                // 更新数据加载完成标记
+                setIsLoad(true)
                 setGamesList(res)
                 addList({
                     type: actionTypes.ADD_GAMESLIST,
@@ -280,9 +285,12 @@ const Home = (props) => {
 
     return (
         <div className='home w'>
-            <Nav />
-            <Main />
-            <CGPBottomLine />
+            <div style={{ display: isLoad ? '' : 'none' }}>
+                <Nav />
+                <Main />
+                <CGPBottomLine />
+            </div>
+            <CGPLoading status={isLoad} />
         </div>
     )
 }

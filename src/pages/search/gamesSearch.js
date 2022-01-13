@@ -108,9 +108,13 @@ const GamesSearch = (props) => {
             fuzzy(e)
         }
 
+        const backRoot = () => {
+            navigate('/')
+        }
+
         return (
             <div className='nav'>
-                <img src={require('../home/static/logo.png').default} alt='' />
+                <img src={require('../home/static/logo.png').default} alt='' onClick={() => backRoot()} />
                 <TopSearch />
                 <CGPSearchBar searchClick={(e) => startSearch(e)} />
             </div>

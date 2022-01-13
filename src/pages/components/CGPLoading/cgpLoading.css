@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 垂直居中 */
+.w {
+    margin: 0 auto;
+}
+
+.cgpLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

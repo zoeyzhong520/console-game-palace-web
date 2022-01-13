@@ -1,7 +1,7 @@
 /*
 games游戏详情页
 */
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react/cjs/react.development'
 import { useDangerouslySetInnerHTML, cgp_recommend_getDetail_with_objectId } from '../../common/common'
 import CGPBottomLine from '../../components/cgpBottomLine/cgpBottomLine'
@@ -10,6 +10,7 @@ import './gamesDetail.css'
 const GamesDetail = () => {
     const { objectId } = useParams()
     const location = useLocation()
+    const navigate = useNavigate()
 
     const [dataSource, setDataSource] = useState({})
 
@@ -24,9 +25,13 @@ const GamesDetail = () => {
     }, [])
 
     const Nav = () => {
+        const backRoot = () => {
+            navigate('/')
+        }
+
         return (
             <div className='nav'>
-                <img src={require('../../home/static/logo.png').default} alt='' />
+                <img src={require('../../home/static/logo.png').default} alt='' onClick={() => backRoot()} />
                 <p>Hello！依托小助的{' "大数据" '}分析，这款游戏一共被查看了{dataSource.readCount ? dataSource.readCount : '888888'}次了。</p>
             </div>
         )
