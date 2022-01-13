@@ -39,15 +39,19 @@ class Carousel extends React.Component {
             imgWidth,
             imgHeight,
             showElem
-        }, () => {
-            // 开启定时器
-            // this.start()
         })
+
+        setTimeout(() => {
+            this.start()
+        }, 500);
     }
 
     componentWillUnmount() {
         // 清除定时器
-        this.stop()
+        // this.stop()
+        this.setState = () => {
+            return
+        }
     }
 
     // 暂停
@@ -61,7 +65,7 @@ class Carousel extends React.Component {
     // 开始
     start = () => {
         let { timer } = this.state
-
+        
         // 当图片数量<=1时无需启动定时器
         if (this.state.listImg.length <= 1 || timer) {
             return
@@ -69,7 +73,7 @@ class Carousel extends React.Component {
 
         timer = setInterval(() => {
             this.next()
-        }, 8000)
+        }, 5000)
         this.setState({
             timer
         })

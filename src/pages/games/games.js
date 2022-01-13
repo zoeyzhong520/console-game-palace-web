@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { tabsList, cgp_recommend_all_list, cgp_recommend_query_list } from '../common/common'
+import { tabsList, cgp_recommend_all_list, cgp_recommend_query_list, leaderboards_query_list } from '../common/common'
 import * as actionTypes from '../../store/actionTypes'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
@@ -46,6 +46,18 @@ const Games = (props) => {
         if (props.gamesList.length > 0) {
             setRankList(props.gamesList)
         }
+
+        // API
+        const apiRequest = () => {
+            leaderboards_query_list().then(res => {
+                setRankList(res)
+                addGamesType({
+                    type: actionTypes.ADD_GAMESLIST,
+                    gamesList: res
+                })
+            })
+        }
+        apiRequest()
     }, [])
 
     // 标签数组

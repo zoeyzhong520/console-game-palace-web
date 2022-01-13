@@ -17,7 +17,7 @@ const CGPLoading = (props) => {
     const [status, setStatus] = useState(true)
     useEffect(() => {
         setStatus(props.status)
-    }, [])
+    }, [props.status])
 
     return (
         <div className="cgpLoading w" style={{ height: screenSize.height, display: status ? '' : 'none' }}>

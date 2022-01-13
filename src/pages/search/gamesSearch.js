@@ -4,11 +4,12 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { fuzzyQuery, recommend_search_all_data } from '../common/common'
+import { fuzzyQuery, recommend_search_all_data, leaderboards_query_list } from '../common/common'
 import * as actionTypes from '../../store/actionTypes'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
+import CGPLoading from '../components/CGPLoading/cgpLoading'
 import './gamesSearch.css'
 
 const GamesSearch = (props) => {
@@ -19,12 +20,16 @@ const GamesSearch = (props) => {
     // 使用reducer
     let { addList } = props
 
+    // 是否加载完成
+    const [isLoad, setIsLoad] = useState(false)
+
     // 全部游戏数据
     const [allGames, setAllGames] = useState([])
     useEffect(() => {
         // API
         const apiRequest = () => {
             if (props.allGames.length > 0) {
+                setIsLoad(true)
                 setAllGames(props.allGames)
                 return
             }
@@ -39,6 +44,7 @@ const GamesSearch = (props) => {
                     })
 
                     if (Math.ceil(tmpAllGames.length / 100) === maxCount) {
+                        setIsLoad(true)
                         // 更新allGames
                         setAllGames(tmpAllGames)
                         // 使用reducer缓存数据
@@ -74,6 +80,18 @@ const GamesSearch = (props) => {
         if (props.gamesList.length > 0) {
             setRankList(props.gamesList)
         }
+
+        // API
+        const apiRequest = () => {
+            leaderboards_query_list().then(res => {
+                setRankList(res)
+                addList({
+                    type: actionTypes.ADD_GAMESLIST,
+                    gamesList: res
+                })
+            })
+        }
+        apiRequest()
     }, [])
 
     // 导航区域
@@ -97,7 +115,7 @@ const GamesSearch = (props) => {
                 </div>
             )
         }
-        
+
         // 搜索API
         const startSearch = (e) => {
             if (e.length === 0) {
@@ -145,9 +163,12 @@ const GamesSearch = (props) => {
 
     return (
         <div className='gamesSearch w'>
-            <Nav />
-            <Main />
-            <CGPBottomLine />
+            <div style={{ display: isLoad ? '' : 'none' }}>
+                <Nav />
+                <Main />
+                <CGPBottomLine />
+            </div>
+            <CGPLoading status={!isLoad} />
         </div>
     )
 }

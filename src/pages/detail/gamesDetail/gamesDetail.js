@@ -5,6 +5,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react/cjs/react.development'
 import { useDangerouslySetInnerHTML, cgp_recommend_getDetail_with_objectId } from '../../common/common'
 import CGPBottomLine from '../../components/cgpBottomLine/cgpBottomLine'
+import CGPLoading from '../../components/CGPLoading/cgpLoading'
 import './gamesDetail.css'
 
 const GamesDetail = () => {
@@ -12,12 +13,15 @@ const GamesDetail = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const [dataSource, setDataSource] = useState({})
+    // 是否加载完成
+    const [isLoad, setIsLoad] = useState(false)
 
-    useEffect(() => { 
+    const [dataSource, setDataSource] = useState({})
+    useEffect(() => {
         // API
         const apiRequest = () => {
             cgp_recommend_getDetail_with_objectId(objectId, location.state && location.state.isBanner ? 'CGP_Banner' : 'CGP_HotRecommend').then(res => {
+                setIsLoad(true)
                 setDataSource(res)
             })
         }
@@ -102,9 +106,12 @@ const GamesDetail = () => {
 
     return (
         <div className="gamesDetail w">
-            <Nav />
-            <Main />
-            <CGPBottomLine />
+            <div style={{ display: isLoad ? '' : 'none' }}>
+                <Nav />
+                <Main />
+                <CGPBottomLine />
+            </div>
+            <CGPLoading status={!isLoad} />
         </div>
     )
 }

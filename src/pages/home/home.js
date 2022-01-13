@@ -71,6 +71,7 @@ const Home = (props) => {
     useEffect(() => {
         // 判断reducer是否有缓存的数据
         if (props.gamesList.length > 0) {
+            setIsLoad(true)
             setGamesList(props.gamesList)
             return
         }
@@ -290,7 +291,7 @@ const Home = (props) => {
                 <Main />
                 <CGPBottomLine />
             </div>
-            <CGPLoading status={isLoad} />
+            <CGPLoading status={!isLoad} />
         </div>
     )
 }
