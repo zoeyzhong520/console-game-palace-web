@@ -42,6 +42,7 @@ class Carousel extends React.Component {
         })
 
         setTimeout(() => {
+            
             this.start()
         }, 500);
     }

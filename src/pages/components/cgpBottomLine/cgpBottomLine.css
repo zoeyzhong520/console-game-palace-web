@@ -1,6 +1,8 @@
 .bottomLine {
     clear: both;
-    padding: 300px 0 20px 0;
+    width: 1200px;
+    padding-top: 300px;
+    padding-bottom: 5px;
 }
 
 .bottomLine p {

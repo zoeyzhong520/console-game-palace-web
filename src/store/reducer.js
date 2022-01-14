@@ -10,7 +10,6 @@ const defaultState = {
 }
 
 const reducer = (state = defaultState, action) => {
-    console.log(action)
     switch (action.type) {
         case actionTypes.ADD_BANNERLIST:
             return {

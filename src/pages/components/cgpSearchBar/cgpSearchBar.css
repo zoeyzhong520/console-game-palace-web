@@ -14,15 +14,19 @@
 }
 
 .search input:hover {
-    border: 1px solid #2979ff;
+    /* border: 1px solid #2979ff; */
     border-right: 0;
 }
 
 .search button {
     width: 100px;
     height: 50px;
-    color: #fff;
-    background-color: #2979ff;
     border: none;
     border-radius: 0 3px 3px 0;
+
+    color: #fff;
+    background-color: #2979ff;
+
+    color: #aaa;
+    background-color: #ccc;
 }

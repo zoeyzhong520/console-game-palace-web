@@ -23,7 +23,8 @@ const CGPSearchBar = (props) => {
     return (
         <div className="search">
             <input type="text" name='search' placeholder='请输入游戏名称' autoComplete='off' value={inputValue} onChange={(e) => change(e)} />
-            <button onClick={() => searchClick()}>搜索</button>
+            <button style={{ color: inputValue.length > 0 ? '#fff' : '#aaa', backgroundColor: inputValue.length > 0 ? '#2979ff' : '#ccc' }}
+             onClick={() => searchClick()}>搜索</button>
         </div>
     )
 }
