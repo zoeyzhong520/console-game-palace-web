@@ -227,9 +227,12 @@ const Home = (props) => {
 
                 return (
                     <div className='other-right'>
-                        {pArray.map(item => {
-                            return <p>{item}</p>
-                        })}
+                        <img src={require(props.type === 1 ? './static/gamesCollection.jpg' : './static/articlesCollection.jpg').default} alt='' />
+                        <div className='other-right-text'>
+                            {pArray.map(item => {
+                                return <p>{item}</p>
+                            })}
+                        </div>
                     </div>
                 )
             }
@@ -266,12 +269,14 @@ const Home = (props) => {
             <div className='main w'>
                 <div className="hd">
                     <div className="screening">
+                        <img src={require('./static/screeningBg.jpg').default} alt='' />
                         <div className='screening-cover'>
                             {getTabsList()}
                         </div>
                     </div>
                     <div className="carousel">
-                        <Carousel listImg={getCarouselImgs()} imgWidth='895px' imgHeight='450px' onClick={(imgIndex) => clickCarousel(imgIndex)} />
+                        <Carousel listImg={getCarouselImgs()} imgWidth='895px' imgHeight='450px'
+                            onClick={(imgIndex) => clickCarousel(imgIndex)} />
                     </div>
                 </div>
                 <div className="bd">

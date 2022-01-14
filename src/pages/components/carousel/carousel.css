@@ -37,6 +37,7 @@
     color: #fff;
     text-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
     background-color: rgba(0, 0, 0, .3);
+    cursor: pointer;
 }
 
 .carousel-control .left:hover {
@@ -53,6 +54,7 @@
     color: #fff;
     text-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
     background-color: rgba(0, 0, 0, .3);
+    cursor: pointer;
 }
 
 .carousel-control .right:hover {
