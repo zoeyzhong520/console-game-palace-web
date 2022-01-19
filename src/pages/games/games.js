@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { tabsList, cgp_recommend_all_list, cgp_recommend_query_list, leaderboards_query_list } from '../common/common'
+import { tabsList, handleOnScroll, cgp_recommend_all_list, cgp_recommend_query_list, leaderboards_query_list } from '../common/common'
 import * as actionTypes from '../../store/actionTypes'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
 import CGPNavLink from '../components/cgpNavLink/cgpNavLink'
 import CGPLoadMore from '../components/cgpLoadMore/cgpLoadMore'
+import CGPLoading from '../components/CGPLoading/cgpLoading'
 import './games.css'
 
 const Games = (props) => {
@@ -22,7 +23,12 @@ const Games = (props) => {
     const [loadstatus, setloadstatus] = useState(null)
 
     // 页数page
-    const [page, setPage] = useState(0)
+    let page = 0
+    // 是否正在加载数据
+    let isFetch = false
+
+    // 是否加载完成
+    const [isLoad, setIsLoad] = useState(false)
 
     // 游戏类型type
     const [gamesType, setGamesType] = useState(props.gamesType.length > 0 && props.gamesType === type ? props.gamesType : type)
@@ -75,12 +81,42 @@ const Games = (props) => {
     const [gamesList, setGamesList] = useState([])
     useEffect(() => {
         apiRequest(gamesType)
+
+        window.onscroll = () => {
+            if (handleOnScroll()) {
+                loadMore()
+            }
+        }
     }, [])
 
     // API
     const apiRequest = (type, page) => {
+        if (isFetch) {
+            return
+        }
+
         if (type === 'All') {
             cgp_recommend_all_list(page).then(res => {
+                // 更新是否加载完毕的标识
+                setIsLoad(true)
+                isFetch = false
+                
+                console.log(JSON.stringify(gamesList))
+                let list = gamesList
+                if (page === 0) {
+                    list = res
+                } else {
+                    list = gamesList.concat(res)
+                }
+                setGamesList(list)
+                setloadstatus(list.length === 0 ? 'noMore' : null)
+            })
+        } else {
+            cgp_recommend_query_list(type, page).then(res => {
+                // 更新是否加载完毕的标识
+                setIsLoad(true)
+                isFetch = false
+
                 if (page === 0) {
                     setGamesList(res)
                 } else {
@@ -88,16 +124,6 @@ const Games = (props) => {
                     setGamesList(list)
                 }
                 setloadstatus(res.length === 0 ? 'noMore' : null)
-            })
-        } else {
-            cgp_recommend_query_list(type, page).then(res => {
-                if (page === 0) {
-                    setGamesList(res)
-                } else {
-                    let list = gamesList.concat(res)
-                    setGamesList(list)
-                    setloadstatus(res.length === 0 ? 'noMore' : null)
-                }
             })
         }
     }
@@ -114,7 +140,7 @@ const Games = (props) => {
                 })
 
                 // 把page清零
-                setPage(0)
+                page = 0
                 // 更新gameType
                 setGamesType(type)
                 // 更新loadstatus
@@ -223,20 +249,22 @@ const Games = (props) => {
     // 加载更多内容
     const loadMore = () => {
         // 页码自增
-        let p = page + 1
-        setPage(p)
+        page++
         // API
         setTimeout(() => {
             setloadstatus('loading')
-            apiRequest(gamesType, p)
-        }, 50);
+            apiRequest(gamesType, page)
+        }, 500);
     }
 
     return <div className='games w'>
-        <Nav />
-        <Main />
-        <CGPLoadMore onClick={loadMore} loadstatus={loadstatus} />
-        <CGPBottomLine />
+        <div style={{ display: isLoad ? '' : 'none' }}>
+            <Nav />
+            <Main />
+            <CGPLoadMore onClick={loadMore} loadstatus={loadstatus} />
+            <CGPBottomLine />
+        </div>
+        <CGPLoading status={!isLoad} />
     </div>
 }
 

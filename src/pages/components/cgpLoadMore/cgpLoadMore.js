@@ -15,7 +15,7 @@ const CGPLoadMore = (props) => {
     */ 
     const [loadTitle, setLoadTitle] = useState('')
     useEffect(() => {
-        setLoadTitle(props.loadstatus ? (props.loadstatus === 'loading' ? '加载中...' : (props.loadstatus === 'noMore' ? '没有更多内容了' : '加载更多内容')) : '加载更多内容')
+        setLoadTitle(props.loadstatus ? (props.loadstatus === 'loading' ? '加载中...' : (props.loadstatus === 'noMore' ? '没有更多内容了' : '点击加载更多内容')) : '点击加载更多内容')
     }, [props.loadstatus]) 
 
     // 响应按钮点击

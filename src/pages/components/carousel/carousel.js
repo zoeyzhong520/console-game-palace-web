@@ -134,7 +134,7 @@ class Carousel extends React.Component {
                         return (
                             <li className={imgIndex === this.state.index ? 'show' : ''} key={item+'img'}>
                                 <img src={item} alt='' onClick={() => this.onClick(imgIndex)}
-                                style={{ width: this.state.imgWidth, height: this.state.imgHeight }}
+                                style={{ width: this.state.imgWidth, height: this.state.imgHeight, backgroundSize: this.state.imgWidth }}
                                  />
                             </li>
                         )

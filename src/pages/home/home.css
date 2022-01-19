@@ -207,6 +207,8 @@ body {
     height: 175px;
     border-radius: 3px 3px 0 0;
     object-fit: cover;
+    background: url('../../static/placeholder.png') no-repeat center;
+    background-size: 285px;
 }
 
 .home .main .bd .list ul li span {

@@ -108,17 +108,13 @@ export const randomColor = () => {
 
 // 处理页面滚动
 export const handleOnScroll = () => {
-    return new Promise((resolve, reject) => {
-        // 滚动条距离顶部
-        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        // 可视区域
-        let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
-        // 滚动条内容的总高度
-        let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-        if (scrollTop + clientHeight === scrollHeight) {
-            resolve(true)
-        }
-    })
+    // 滚动条距离顶部
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    // 可视区域
+    let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    // 滚动条内容的总高度
+    let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    return scrollTop + clientHeight === scrollHeight
 }
 
 /**

@@ -132,6 +132,8 @@
     height: 100%;
     border-radius: 3px 0 0 3px;
     object-fit: cover;
+    background: url('../../static/placeholder.png') no-repeat center;
+    background-size: 250px;
 }
 
 .games .main ul {

@@ -92,6 +92,8 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 3px 0 0 3px;
+    background: url('../../static/placeholder.png') no-repeat center;
+    background-size: 250px;
 }
 
 .gamesSearch .main .content {
