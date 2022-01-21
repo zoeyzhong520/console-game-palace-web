@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { tabsList, handleOnScroll, cgp_recommend_all_list, cgp_recommend_query_list, leaderboards_query_list } from '../common/common'
+import { tabsList   , cgp_recommend_all_list, cgp_recommend_query_list, leaderboards_query_list } from '../common/common'
 import * as actionTypes from '../../store/actionTypes'
 import CGPSearchBar from '../components/cgpSearchBar/cgpSearchBar'
 import CGPBottomLine from '../components/cgpBottomLine/cgpBottomLine'
@@ -23,7 +23,8 @@ const Games = (props) => {
     const [loadstatus, setloadstatus] = useState(null)
 
     // 页数page
-    let page = 0
+    const [page, setPage] = useState(0)
+
     // 是否正在加载数据
     let isFetch = false
 
@@ -81,12 +82,6 @@ const Games = (props) => {
     const [gamesList, setGamesList] = useState([])
     useEffect(() => {
         apiRequest(gamesType)
-
-        window.onscroll = () => {
-            if (handleOnScroll()) {
-                loadMore()
-            }
-        }
     }, [])
 
     // API
@@ -100,16 +95,14 @@ const Games = (props) => {
                 // 更新是否加载完毕的标识
                 setIsLoad(true)
                 isFetch = false
-                
-                console.log(JSON.stringify(gamesList))
-                let list = gamesList
+
                 if (page === 0) {
-                    list = res
+                    setGamesList(res)
                 } else {
-                    list = gamesList.concat(res)
+                    let list = gamesList.concat(res)
+                    setGamesList(list)
+                    setloadstatus(res.length === 0 ? 'noMore' : null)
                 }
-                setGamesList(list)
-                setloadstatus(list.length === 0 ? 'noMore' : null)
             })
         } else {
             cgp_recommend_query_list(type, page).then(res => {
@@ -122,8 +115,8 @@ const Games = (props) => {
                 } else {
                     let list = gamesList.concat(res)
                     setGamesList(list)
+                    setloadstatus(res.length === 0 ? 'noMore' : null)
                 }
-                setloadstatus(res.length === 0 ? 'noMore' : null)
             })
         }
     }
@@ -140,7 +133,7 @@ const Games = (props) => {
                 })
 
                 // 把page清零
-                page = 0
+                setPage(0)
                 // 更新gameType
                 setGamesType(type)
                 // 更新loadstatus
@@ -249,12 +242,11 @@ const Games = (props) => {
     // 加载更多内容
     const loadMore = () => {
         // 页码自增
-        page++
+        let p = page+1
+        setPage(p)
         // API
-        setTimeout(() => {
-            setloadstatus('loading')
-            apiRequest(gamesType, page)
-        }, 500);
+        setloadstatus('loading')
+        apiRequest(gamesType, p)
     }
 
     return <div className='games w'>
