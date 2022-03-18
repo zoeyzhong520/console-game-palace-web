@@ -39,9 +39,11 @@
 }
 
 .articles .nav .random p {
-    text-align: center;
-    border-left: 1px solid #ccc;
     padding-left: 20px;
+    margin-left: 200px;
+    text-align: center;
+    border-left: 1px solid #cccccc;
+    white-space: nowrap;
 }
 
 .articles .nav .random p a {
@@ -77,6 +79,11 @@
     margin: 0 21px 20px 0;
     background-color: #fff;
     border-radius: 0 0 3px 3px;
+}
+
+.articles .main .articles-list ul li:hover {
+    transform: translateY(-5px);
+    transition: all 0.1s;
 }
 
 .articles .main .articles-list ul li img {

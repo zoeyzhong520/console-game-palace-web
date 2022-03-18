@@ -147,6 +147,11 @@
     border-radius: 0 3px 3px 0;
 }
 
+.games .main ul li:hover {
+    transform: scale(1.01);
+    transition: all 0.1s;
+}
+
 .games .main .content {
     float: left;
     width: 340px;

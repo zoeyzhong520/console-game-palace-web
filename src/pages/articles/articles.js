@@ -18,7 +18,7 @@ const Articles = () => {
     // 页数page
     const [page, setPage] = useState(0)
     useEffect(() => {
-        
+
     }, [])
 
     // 加载状态
@@ -26,7 +26,7 @@ const Articles = () => {
 
     // API
     const apiRequest = (page) => {
-        cgp_popular_articles_list(page, 9).then(res => {
+        cgp_popular_articles_list(page, 27).then(res => {
             if (page === 0) {
                 setArticlesList(res)
             } else {
@@ -54,7 +54,7 @@ const Articles = () => {
             <div className='nav'>
                 <img className='logo' src={require('../home/static/logo.png').default} alt='' onClick={() => backRoot()} />
                 <div className='random'>
-                    <p><a href='#' onClick={() => readArticleRandom()}>想要随机看篇文章？{<br />}试着点击一下这里。</a></p>
+                    <p><a href='' onClick={() => readArticleRandom()}>不知道哪篇文章好看？想要随机看篇文章？试着点击一下这里。^_^</a></p>
                 </div>
             </div>
         )

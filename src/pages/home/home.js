@@ -269,7 +269,6 @@ const Home = (props) => {
             <div className='main w'>
                 <div className="hd">
                     <div className="screening">
-                        <img src={require('./static/screeningBg.jpg').default} alt='' />
                         <div className='screening-cover'>
                             {getTabsList()}
                         </div>

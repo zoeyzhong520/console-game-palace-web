@@ -169,8 +169,8 @@ export const cgp_recommend_all_list = function (page) {
         const query = React.$bmob.Query('CGP_HotRecommend')
         // 对createdAt字段降序排列
         query.order("-createdAt")
-        query.limit(10)
-        query.skip(page * 10)
+        query.limit(40)
+        query.skip(page * 40)
         query.find().then(res => {
             // console.log(res)
             resolve(res)
@@ -242,8 +242,8 @@ export const cgp_recommend_query_list = function (type, page) {
         query.order("-createdAt")
         // 对readCount字段降序排列
         query.order("-readCount")
-        query.limit(10)
-        query.skip(page * 10)
+        query.limit(40)
+        query.skip(page * 40)
         query.find().then(res => {
             // console.log(res)
             resolve(res)

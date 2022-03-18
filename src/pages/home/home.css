@@ -91,14 +91,6 @@ body {
     text-shadow: 2px 2px 2px #333;
 }
 
-.home .main .hd .screening img {
-    width: 100%;
-    height: 100%;
-    border-radius: 3px 0 0 3px;
-    object-fit: cover;
-    opacity: 0.6;
-}
-
 .home .main .hd .screening .screening-cover {
     position: absolute;
     top: 0;
@@ -108,7 +100,8 @@ body {
     margin: auto;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 3px 0 0 3px;
 }
 
 .home .main .hd .screening ul {
@@ -209,6 +202,11 @@ body {
     object-fit: cover;
     background: url('../../static/placeholder.png') no-repeat center;
     background-size: 285px;
+}
+
+.home .main .bd .list ul li:hover {
+    transform: translateY(-5px);
+    transition: all 0.1s;
 }
 
 .home .main .bd .list ul li span {
